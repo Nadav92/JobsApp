@@ -11,12 +11,13 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { HomeComponent } from './components/home/home.component';
 import { ListsComponent } from './components/lists/lists.component';
 import { CoreModule } from './modules/core.module';
-import { SharedModule } from './modules/shared.module';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptors';
+import { SharedModule } from './modules/shared.module';
+import { MemberEditComponent } from './components/member-edit/member-edit.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptors';
     MessagesComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberEditComponent
    ],
   imports: [
     BrowserModule,

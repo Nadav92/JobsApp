@@ -1,3 +1,4 @@
+import { MemberEditComponent } from './components/member-edit/member-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -24,8 +25,9 @@ const routes: Routes = [
         path: 'members',
         loadChildren: () => import('./modules/members.module').then(m=> m.MembersModule)
       },
+      {path: 'member/edit',component: MemberEditComponent},
       {path: 'lists',component: ListsComponent},
-      {path: 'messages',component: MessagesComponent}
+      {path: 'messages',component: MessagesComponent},
     ]
   },
   {

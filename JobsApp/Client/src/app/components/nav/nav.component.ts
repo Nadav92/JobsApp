@@ -1,21 +1,27 @@
+import { Member } from 'src/app/models/member';
 import { AccountService } from '../../services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/User';
 import { Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MembersService } from 'src/app/services/members.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
+
+
 export class NavComponent implements OnInit {
+  member: Member;
   model: any = {};
   currentUser$: Observable<User | null>;
   constructor(private accountService: AccountService,
     private router: Router,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    ) {
     this.currentUser$ = this.accountService.currentUser$;
   }
 
@@ -34,4 +40,5 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('/');
     this.accountService.logout();
   }
+
 }

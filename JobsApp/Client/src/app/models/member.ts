@@ -9,14 +9,18 @@ export interface Member {
     lastActive:         Date;
     employerOrEmployee: string;
     gender:             string;
-    introduction:       string;
-    lookingFor:         string;
     skills:             string;
-    lastJobs:           string;
     city:               string;
     country:            string;
     phoneNumber:        string;
     email:              string;
+    professionalHistory:string;
+    education:          string;
+    languages:          string;
+    militaryService:    string;
+    professionalSummary:string;
+    hobbies:            string;
+    introduction:       string;
     photos:             Photo[];
     photoUrl:           string;
 }
