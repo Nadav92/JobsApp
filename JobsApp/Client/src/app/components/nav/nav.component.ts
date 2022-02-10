@@ -15,7 +15,6 @@ import { MembersService } from 'src/app/services/members.service';
 
 
 export class NavComponent implements OnInit {
-  member: Member;
   model: any = {};
   currentUser$: Observable<User | null>;
   constructor(private accountService: AccountService,

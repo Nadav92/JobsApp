@@ -4,9 +4,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   imports: [
+    NgxSpinnerModule,
     NgxGalleryModule,
     CommonModule,
     BsDropdownModule.forRoot(),
@@ -17,6 +19,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
   ],
   declarations: [],
   exports:[
+    NgxSpinnerModule,
     NgxGalleryModule,
     ToastrModule,
     BsDropdownModule,
