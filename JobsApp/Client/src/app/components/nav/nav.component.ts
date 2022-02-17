@@ -1,11 +1,10 @@
 import { Member } from 'src/app/models/member';
+import { MembersService } from 'src/app/services/members.service';
+import { User } from 'src/app/models/User';
 import { AccountService } from '../../services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/User';
-import { Observable } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MembersService } from 'src/app/services/members.service';
+import { Observable, take, map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -15,29 +14,36 @@ import { MembersService } from 'src/app/services/members.service';
 
 
 export class NavComponent implements OnInit {
+  // username = "";
+  // showEmploeeOrEmployer = false;
+   member: Member;
+   
+
   model: any = {};
   currentUser$: Observable<User | null>;
-  constructor(private accountService: AccountService,
-    private router: Router,
-    private toastr: ToastrService,
-    ) {
+  constructor(
+    private accountService: AccountService,
+    private router: Router
+  ) {
     this.currentUser$ = this.accountService.currentUser$;
+    
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   login() {
     this.accountService.login(this.model)
       .subscribe(response => {
-      this.router.navigateByUrl('/members');
+        this.router.navigateByUrl('/members');
         console.log(response);
       });
+
+      
   }
 
   logout() {
     this.router.navigateByUrl('/');
     this.accountService.logout();
   }
-
 }

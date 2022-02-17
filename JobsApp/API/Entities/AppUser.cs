@@ -29,6 +29,7 @@ namespace API.Entities
         public string ProfessionalSummary { get; set; }
         public string Hobbies { get; set; }
         public string Introduction { get; set; }
+        public string Profession { get; set; }
 
         public ICollection<Photo> Photos { get; set; }
 

@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { MembersService } from './../../../services/members.service';
 import { Component, OnInit } from '@angular/core';
 import { Member } from 'src/app/models/member';
@@ -8,18 +9,34 @@ import { Member } from 'src/app/models/member';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  members :Member[] = [];
+  members$ :Observable<Member[]>;
+  members : Member[] = [];
+
+  public professionArr = [
+    {
+      name: 'All',
+    },
+    {
+      name: 'Security',
+    },
+    {
+      name: 'Catering',
+    },
+    {
+      name: 'Hi-Tec',
+    },
+    {
+      name: 'Medicine',
+    }
+  ]
   constructor(private memberService: MembersService) { }
 
   ngOnInit() {
-    this.loadMember();
+    this.members$ = this.memberService.getMembers();
   }
 
-  loadMember(){
-    this.memberService.getMembers()
-    .subscribe(members => {
-      this.members = members;
-    })
-  }
-
+  // getFilteredMemberByPro(){
+    
+  //   this.members = this.memberService.getMemberByprofession('Security');
+  // }
 }

@@ -19,6 +19,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { JwtInterceptor } from './interceptors/jwt.interceptors';
 import { SharedModule } from './modules/shared.module';
 import { MemberEditComponent } from './components/member-edit/member-edit.component';
+import { PhotoEditorComponent } from './components/member-edit/photo-editor/photo-editor.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MemberEditComponent } from './components/member-edit/member-edit.compon
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
    ],
   imports: [
     BrowserModule,

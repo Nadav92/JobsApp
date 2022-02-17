@@ -15,6 +15,23 @@ import { NgForm } from '@angular/forms';
 export class MemberEditComponent implements OnInit {
   member: Member;
   user: User;
+  public professionArr = [
+    {
+      name: "All",
+    },
+    {
+      name: "Security",
+    },
+    {
+      name: "Catering",
+    },
+    {
+      name: "Hi-Tec",
+    },
+    {
+      name: "Medicine",
+    }
+  ]
 
   @ViewChild('editGeneral') editGeneral: NgForm
   @ViewChild('editResume') editResume: NgForm
@@ -34,8 +51,9 @@ export class MemberEditComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user as User
     });
+    
   }
-
+  
   ngOnInit() {
     this.loadMember();
   }

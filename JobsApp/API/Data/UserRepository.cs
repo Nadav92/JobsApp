@@ -43,6 +43,7 @@ namespace API.Data
         public async Task<AppUser> GetUserByUserNameAsync(string username)
         {
             return await _context.Users
+            .Include(x => x.Photos)
             .SingleOrDefaultAsync(x => x.UserName == username);
         }
 

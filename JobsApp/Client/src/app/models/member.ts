@@ -23,4 +23,5 @@ export interface Member {
     introduction:       string;
     photos:             Photo[];
     photoUrl:           string;
+    profession:         string;
 }

@@ -20,6 +20,10 @@
                 <strong>Type:</strong>
                 <p>{{member.employerOrEmployee}}</p>
               </div>
+              <div>
+                <strong>profession:</strong>
+                <p>{{member.profession}}</p>
+              </div>
                <div>
                   <strong>Location:</strong>
                   <p>{{member.city}}, {{member.country}}</p>
@@ -60,6 +64,14 @@
               <textarea [(ngModel)]="member.introduction" name="introduction" class="form-control" rows="6"></textarea>
               <h4 class="mt-2">Hobbies</h4>
               <textarea [(ngModel)]="member.hobbies" name="hobbies" class="form-control mt-2" rows="6"></textarea>
+
+              <h4 class="mt-2">Profession</h4>
+              <div class="form-inline">
+                <select name="profession" class="form-control form-select mx-2" [(ngModel)]="member.profession">
+                  <option *ngFor="let p of professionArr" [ngValue]="p.name">{{p.name}}</option>
+                </select>
+              </div>
+
               <h4 class="mt-2">Location Details</h4>
               <div class="form-inline">
                 <label for="city">City:</label>
@@ -93,7 +105,7 @@
             </form>
           </tab>
           <tab heading="Edit Photo">
-            photo will go here
+            <app-photo-editor [member]="member"></app-photo-editor>
           </tab>
 
       </tabset>

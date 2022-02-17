@@ -25,6 +25,8 @@ namespace API.DTOs
         public string ProfessionalSummary { get; set; }
         public string Hobbies { get; set; }
         public string Introduction { get; set; }
+        public string Profession { get; set; }
+
 
         public ICollection<PhotoDto> Photos { get; set; }
         public string PhotoUrl { get; set; }
