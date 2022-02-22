@@ -11,6 +11,7 @@ import { Member } from 'src/app/models/member';
 export class MemberListComponent implements OnInit {
   members$ :Observable<Member[]>;
   members : Member[] = [];
+  filetrMember: Member | any
 
   public professionArr = [
     {
@@ -35,8 +36,5 @@ export class MemberListComponent implements OnInit {
     this.members$ = this.memberService.getMembers();
   }
 
-  // getFilteredMemberByPro(){
-    
-  //   this.members = this.memberService.getMemberByprofession('Security');
-  // }
 }
+

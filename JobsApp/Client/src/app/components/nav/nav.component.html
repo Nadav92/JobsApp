@@ -3,9 +3,10 @@
     <a class="navbar-brand" routerLink="/">Jobs App</a>
  
       <ul  class="navbar-nav mr-auto">
-        <ng-container *ngIf="currentUser$ | async" >
+        <ng-container *ngIf="currentUser$ | async as user" >
           <li class="nav-item" >
-            <a class="nav-link" routerLinkActive="active" routerLink="/members" >Search</a>
+            <a *ngIf="user.employerOrEmployee == 'Employee'" class="nav-link" routerLinkActive="active" routerLink="/members" >Find Job</a>
+            <a *ngIf="user.employerOrEmployee == 'Employer'" class="nav-link" routerLinkActive="active" routerLink="/members" >Find Employee</a>
            </li>
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/lists">Lists</a>
@@ -20,6 +21,7 @@
       </ul>
 
       <div class="dropdown" *ngIf="currentUser$ | async as user" dropdown>
+        <img class="img" src="{{user.photoUrl}}" alt="{{user.username}}">
         <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username | titlecase }}</a>
 
         <div class="dropdown-menu" *dropdownMenu>
