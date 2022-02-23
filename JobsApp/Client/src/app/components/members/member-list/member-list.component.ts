@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
+import { Member } from './../../../models/member';
+import { filter, map, Observable } from 'rxjs';
 import { MembersService } from './../../../services/members.service';
 import { Component, OnInit } from '@angular/core';
-import { Member } from 'src/app/models/member';
 
 @Component({
   selector: 'app-member-list',
@@ -10,8 +10,7 @@ import { Member } from 'src/app/models/member';
 })
 export class MemberListComponent implements OnInit {
   members$ :Observable<Member[]>;
-  members : Member[] = [];
-  filetrMember: Member | any
+  members : Member;
 
   public professionArr = [
     {
@@ -34,6 +33,18 @@ export class MemberListComponent implements OnInit {
 
   ngOnInit() {
     this.members$ = this.memberService.getMembers();
+  }
+
+
+  filterByProfession(member:Member){
+    // filterByProfession(prof:string){
+    
+    this.members$ = this.members$.pipe(
+      map(items=> 
+        items.filter(items => items.profession == member.profession))
+    ) 
+    // (change)="filterPro(member)" For Html
+    // (change)="filterPro('Catering')" For Html
   }
 
 }

@@ -17,9 +17,6 @@ export class MemberEditComponent implements OnInit {
   user: User;
   public professionArr = [
     {
-      name: "All",
-    },
-    {
       name: "Security",
     },
     {
