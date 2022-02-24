@@ -8,8 +8,10 @@
                     <p>{{member.gender}}</p>
                 </div>
                 <div>
-                    <strong>Type:</strong>
+                    <strong>I am:</strong>
                     <p>{{member.employerOrEmployee}}</p>  
+                </div>
+                <div>
                     <strong>Profession:</strong>
                     <p>{{member.profession}}</p>
                 </div>
@@ -29,11 +31,11 @@
                     <strong>Member Since:</strong>
                     <p>{{member.created}}</p>
                 </div>
-                <div>
+                <div *ngIf="member.phoneNumber">
                     <strong>Phone Number:</strong>
                     <p>{{member.phoneNumber}}</p>
                 </div>
-                <div>
+                <div *ngIf="member.email">
                     <strong>Email:</strong>
                     <p>{{member.email}}</p>
                 </div>
@@ -49,23 +51,25 @@
     <div class="col-8 tabs">
         <tabset class="member-tabset">
             <tab heading="About {{member.knownAs}}">
-                <h4>About Me</h4>
-                <p>{{member.introduction}}</p>
+                <h4> About Me</h4>
+                <p *ngIf="member.introduction" >{{member.introduction}}</p>
+                <p *ngIf="!member.introduction">No content</p>
                 <h4>Hobbies</h4>
-                <p>{{member.hobbies}}</p>
+                <p *ngIf="member.hobbies">{{member.hobbies}}</p>
+                <p *ngIf="!member.hobbies">No content</p>
             </tab>
             <tab heading="Resume">
-                <h4>professional Summary</h4>
+                <h4 *ngIf="member.professionalSummary">professional Summary</h4>
                 <p>{{member.professionalSummary}}</p>
-                <h4>Education</h4>
+                <h4 *ngIf="member.education">Education</h4>
                 <p>{{member.education}}</p>
-                <h4>professional History</h4>
+                <h4 *ngIf="member.professionalHistory">professional History</h4>
                 <p>{{member.professionalHistory}}</p>
-                <h4>Skills</h4>
+                <h4 *ngIf="member.skills">Skills</h4>
                 <p>{{member.skills}}</p>
-                <h4>Languages</h4>
+                <h4 *ngIf="member.languages">Languages</h4>
                 <p>{{member.languages}}</p>
-                <h4>Military Service</h4>
+                <h4 *ngIf="member.militaryService">Military Service</h4>
                 <p>{{member.militaryService}}</p>
             </tab>
             <tab heading="Photo">

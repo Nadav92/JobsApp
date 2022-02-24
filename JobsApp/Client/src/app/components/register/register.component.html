@@ -1,15 +1,40 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
   <h2 class="text-center text-primary">Sign Up</h2>
   <br>
+
+  <app-text-input formControlName="username" label="Username"></app-text-input>
+  <app-text-input formControlName="knownAs" label="Known As"></app-text-input>
   <div class="form-group">
-    <input type="text" class="form-control" formControlName="username" placeholder="Username">
+    <div class="form-labael mr-1">Gender:</div>
+    <label class="form-check-label">
+      <input type="radio" value="male" formControlName="gender"> Male
+    </label>
+    <label class="form-check-label">
+      <input class="ml-3" type="radio" value="female" formControlName="gender"> Female
+    </label>
   </div>
+  <label class="form-label"> Profession: </label>
+    <select class="form-group form-select mb-2" formControlName="profession" label="Choose">
+      <option value="Security">Security</option>
+      <option value="Catering">Catering</option>
+      <option value="Hi-Tec">Hi-Tec</option>
+      <option value="Medicine">Medicine</option>
+    </select>
   <div class="form-group">
-    <input type="password" class="form-control" formControlName="password" placeholder="Password">
+    <div class="form-labael mr-1">I am a:</div>
+    <label class="radio-inline">
+      <input type="radio" value="employer" formControlName="employerOrEmployee"> Employer
+    </label>
+    <label class="radio-inline">
+      <input class="ml-3" type="radio" value="employee" formControlName="employerOrEmployee"> Employee
+    </label>
   </div>
-  <div class="form-group">
-    <input type="password" class="form-control" formControlName="confirmPassword" placeholder="confirm Password">
-  </div>
+  <app-date-input formControlName="dateOfBirth" label="Date Of Birth" [maxDate]="maxDate"></app-date-input>
+  <app-text-input formControlName="city" label="City"></app-text-input>
+  <app-text-input formControlName="country" label="Country"></app-text-input>
+  <app-text-input formControlName="password" label="Password" type="password"></app-text-input>
+  <app-text-input formControlName="confirmPassword" label="Confirm Password" type="password"></app-text-input>
+
 
   <div class="form-group text-center">
     <button class="btn btn-success mr-2" type="submit">Register</button>

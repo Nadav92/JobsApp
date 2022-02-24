@@ -20,6 +20,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptors';
 import { SharedModule } from './modules/shared.module';
 import { MemberEditComponent } from './components/member-edit/member-edit.component';
 import { PhotoEditorComponent } from './components/member-edit/photo-editor/photo-editor.component';
+import { TextInputComponent } from './components/forms/text-input/text-input.component';
+import { DateInputComponent } from './components/forms/date-input/date-input.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { PhotoEditorComponent } from './components/member-edit/photo-editor/phot
     NotFoundComponent,
     ServerErrorComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TextInputComponent,
+    DateInputComponent
    ],
   imports: [
     ReactiveFormsModule,
