@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using API.Extansions;
 using Microsoft.AspNetCore.Http;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Controllers
 {
@@ -27,10 +28,16 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var userToReturn = await _userRepository.GetMembersAsync();
-            return Ok(userToReturn);
+            var users = await _userRepository.GetMembersAsync(userParams);
+            Response.AddPaginationHeader(
+                users.CurrentPage,
+                users.PageSize,
+                users.TotalCount,
+                users.TotalPages
+                );
+            return Ok(users);
         }
 
         [HttpGet("{username}", Name = "GetUser")] // api/users/name
