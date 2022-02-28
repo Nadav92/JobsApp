@@ -2,7 +2,7 @@
   <h2 class="text-center text-primary">Sign Up</h2>
   <br>
 
-  <app-text-input formControlName="username" label="Username"></app-text-input>
+  <app-text-input formControlName="username" label="Username / Company Name"></app-text-input>
   <app-text-input formControlName="knownAs" label="Known As"></app-text-input>
   <div class="form-group">
     <div class="form-labael mr-1">Gender:</div>
@@ -23,10 +23,10 @@
   <div class="form-group">
     <div class="form-labael mr-1">I am a:</div>
     <label class="radio-inline">
-      <input type="radio" value="employer" formControlName="employerOrEmployee"> Employer
+      <input type="radio" value="Employer" formControlName="employerOrEmployee"> Employer
     </label>
     <label class="radio-inline">
-      <input class="ml-3" type="radio" value="employee" formControlName="employerOrEmployee"> Employee
+      <input class="ml-3" type="radio" value="Employee" formControlName="employerOrEmployee"> Employee
     </label>
   </div>
   <app-date-input formControlName="dateOfBirth" label="Date Of Birth" [maxDate]="maxDate"></app-date-input>
@@ -35,12 +35,14 @@
   <app-text-input formControlName="password" label="Password" type="password"></app-text-input>
   <app-text-input formControlName="confirmPassword" label="Confirm Password" type="password"></app-text-input>
 
+  <div class="row mt-5"*ngIf="ValidationErrors.length">
+    <ul class="text-danger">
+      <li *ngFor="let error of ValidationErrors">{{error}}</li>
+    </ul>
+  </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success mr-2" type="submit">Register</button>
+    <button [disabled]="registerForm.invalid" class="btn btn-success mr-2" type="submit">Register</button>
     <button class="btn btn-defualt mr-2" type="button" (click)="cancel()">Cancel</button>
   </div>
   </form>
-
-  <p>form value {{registerForm.value | json}}</p>
-  <p>form status {{registerForm.status}}</p>

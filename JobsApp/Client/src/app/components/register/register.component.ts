@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -9,15 +10,16 @@ import { AccountService } from '../../services/account.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  model: any = {};
   @Input() usersFromHomeComponent: any;
   @Output() cancelRegister = new EventEmitter<boolean>();
   registerForm: FormGroup; 
   maxDate: Date;
+  ValidationErrors: string[] = [];
   
   constructor(private accountService: AccountService,
     private toastr: ToastrService,
-    private fb:FormBuilder) { }
+    private fb:FormBuilder,
+    private router:Router) { }
   ngOnInit(): void {
     this.initializeForm();
     this.maxDate = new Date();
@@ -25,16 +27,20 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    // this.accountService.register(this.model).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.cancel();
-    //   },
-    //   error => {
-    //     this.toastr.error(error.error);
-    //     console.log(error);
-    //   }
-    // )
+    this.accountService.register(this.registerForm.value).subscribe(
+      (re) => {
+        this.router.navigate(['/members']);
+        this.cancel();
+      },
+      error => {
+        // this.toastr.error(error.error);
+        // console.log(error);
+        if(Array.isArray(error)){
+          this.ValidationErrors = error;
+        }
+     
+      }
+    )
     console.log(this.registerForm.value);
     
   }
@@ -53,7 +59,7 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      employerOrEmployee: ['employer'],
+      employerOrEmployee: ['Employer'],
       profession: ['', Validators.required]
     });
     // this.registerForm = new FormGroup({
