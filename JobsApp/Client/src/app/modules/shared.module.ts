@@ -1,3 +1,4 @@
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -7,6 +8,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
 import {FileUploadModule} from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'
     }),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    // PaginationModule.forRoot()
   ],
   declarations: [],
   exports:[
@@ -30,7 +33,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     ToastrModule,
     BsDropdownModule,
     TabsModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    PaginationModule,
+    FormsModule
   ]
 })
 
