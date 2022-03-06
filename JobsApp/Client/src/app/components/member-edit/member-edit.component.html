@@ -57,13 +57,14 @@
       </div>
   </div>
   <div class="col-8 tabs">
-      <tabset class="member-tabset">
+      <tabset class="member-tabset" >
           <tab heading="General Update">
             <form #editGeneral="ngForm" (ngSubmit)="updtaeMember()" id="editGeneral">
-              <h4>About Me</h4>
+              <h4 *ngIf="member.employerOrEmployee == 'Employee'" >About Me</h4>
+              <h4 *ngIf="member.employerOrEmployee == 'Employer'" >About Us</h4>
               <textarea [(ngModel)]="member.introduction" name="introduction" class="form-control" rows="6"></textarea>
-              <h4 class="mt-2">Hobbies</h4>
-              <textarea [(ngModel)]="member.hobbies" name="hobbies" class="form-control mt-2" rows="6"></textarea>
+              <h4 class="mt-2" *ngIf="member.employerOrEmployee == 'Employee'" >Hobbies</h4 >
+              <textarea *ngIf="member.employerOrEmployee == 'Employee'" [(ngModel)]="member.hobbies" name="hobbies" class="form-control mt-2" rows="6"></textarea>
 
               <h4 class="mt-2">Profession</h4>
               <div class="form-inline">
@@ -88,8 +89,8 @@
               </div>
             </form>
           </tab>
-          <tab heading="Resume">
-            <form  #editResume="ngForm" (ngSubmit)="updtaeMember()" id="editResume">
+          <tab heading="Resume" >
+            <form  #editResume="ngForm" (ngSubmit)="updtaeMember()" id="editResume" >
               <h4 class="mt-2">professional Summary</h4>
               <textarea [(ngModel)]="member.professionalSummary" name="professionalSummary" class="form-control" rows="6"></textarea>
               <h4 class="mt-2">Education</h4>

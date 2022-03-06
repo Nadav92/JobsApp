@@ -1,3 +1,4 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Pagination } from './../../../models/pagination';
 import { Member } from './../../../models/member';
 import { filter, map, Observable } from 'rxjs';
@@ -16,30 +17,15 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   pageNumber: number = 1;
   pageSize: number = 5;
+  selectedProf: string = '';
 
-  // members : Member;
+  public professionArr = ['All', 'Security', 'Catering', 'Hi-Tec', 'Medicine'];
 
-  public professionArr = [
-    {
-      name: 'All',
-    },
-    {
-      name: 'Security',
-    },
-    {
-      name: 'Catering',
-    },
-    {
-      name: 'Hi-Tec',
-    },
-    {
-      name: 'Medicine',
-    }
-  ]
-  constructor(private memberService: MembersService) { }
+  constructor(private memberService: MembersService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.loadMembers();
+
   }
 
   loadMembers() {
@@ -56,17 +42,31 @@ export class MemberListComponent implements OnInit {
     this.loadMembers();
   }
 
-    // filterByProfession(member:Member){
-    //   // filterByProfession(prof:string){
 
-    //   this.members$ = this.members$.pipe(
-    //     map(items=> 
-    //       items.filter(items => items.profession == member.profession))
-    //   ) 
-    //   // (change)="filterPro(member)" For Html
-    //   // (change)="filterPro('Catering')" For Html
-    // }
+  profChanged(event: any) {
+    this.selectedProf = event.target.value;
+    for (let i = 0; i < this.members.length; i++) {
 
+      if (this.selectedProf == 'All') {
+        this.loadMembers();
+        break;
+      }
+
+      if (this.selectedProf != this.members[i].profession) {
+        this.memberService.getMembers(this.pageNumber, this.pagination.totalItems).subscribe(
+          res => {
+            this.members = res.result.filter(items => items.profession == this.selectedProf);
+            this.pagination = res.pagination;
+            if (this.members.length == 0) this.toastr.error('Error - No Data, Refresh the page');
+          }
+        )
+      }
+    }
+    if (this.members.length == 0) {
+      this.toastr.error('Error - Load all users')
+      this.loadMembers();
+    }
   }
+}
 
 

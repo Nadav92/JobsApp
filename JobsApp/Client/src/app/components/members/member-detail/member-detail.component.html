@@ -50,7 +50,7 @@
     </div>
     <div class="col-8 tabs">
         <tabset class="member-tabset">
-            <tab heading="About {{member.knownAs}}">
+            <tab heading="About {{member.knownAs}}" *ngIf="member.employerOrEmployee == 'Employee'">
                 <h4> About Me</h4>
                 <p *ngIf="member.introduction" >{{member.introduction}}</p>
                 <p *ngIf="!member.introduction">No content</p>
@@ -58,7 +58,12 @@
                 <p *ngIf="member.hobbies">{{member.hobbies}}</p>
                 <p *ngIf="!member.hobbies">No content</p>
             </tab>
-            <tab heading="Resume">
+            <tab heading="About {{member.knownAs}}" *ngIf="member.employerOrEmployee == 'Employer'">
+                <h4> About Us</h4>
+                <p *ngIf="member.introduction" >{{member.introduction}}</p>
+                <p *ngIf="!member.introduction">No content</p>
+            </tab>
+            <tab *ngIf="member.employerOrEmployee == 'Employee'" heading="Resume">
                 <h4 *ngIf="member.professionalSummary">professional Summary</h4>
                 <p>{{member.professionalSummary}}</p>
                 <h4 *ngIf="member.education">Education</h4>
@@ -72,10 +77,10 @@
                 <h4 *ngIf="member.militaryService">Military Service</h4>
                 <p>{{member.militaryService}}</p>
             </tab>
-            <tab heading="Photo">
+            <tab heading="Photo" *ngIf="member.photoUrl">
                 <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
             </tab>
-            <tab heading="Messages">
+            <tab heading="Messages" *ngIf="member">
                 <p>messages will go here</p>
             </tab>
         </tabset>

@@ -2,9 +2,8 @@
 
   <div class="form-inline ">
     <strong for="selectprofession" class="mx-2 mt-2" >Select Profession:</strong>
-      <select name="selectprofession" class="form-control form-select mx-2 mt-2" >
-        <!-- <select name="selectprofession" class="form-control form-select mx-2 mt-2" (change)="filterByProfession(members)"> -->
-        <option *ngFor="let p of professionArr" >{{p.name}}</option>
+      <select name="selectprofession" class="form-control form-select mx-2 mt-2" (change)="profChanged($event)" >
+        <option *ngFor="let prof of professionArr">{{prof}}</option>
       </select>
     </div>
     
