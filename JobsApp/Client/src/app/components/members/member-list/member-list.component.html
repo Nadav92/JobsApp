@@ -1,18 +1,50 @@
 <div class="row">
 
-  <div class="form-inline ">
+  <!-- <div class="form-inline ">
     <strong for="selectprofession" class="mx-2 mt-2" >Select Profession:</strong>
       <select name="selectprofession" class="form-control form-select mx-2 mt-2" (change)="profChanged($event)" >
         <option *ngFor="let prof of professionArr">{{prof}}</option>
       </select>
+    </div> -->
+
+  <div class="text-center mt-3">
+    <h2>Your search found {{pagination?.totalItems}} results </h2>
+  </div>
+
+  
+<div class="container mr-3" >
+  <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
+    <div class="form-group px-2">
+      <label for="">Age From</label>
+      <input type="number" style="width: 70px;" class="form-control ml-1" name="minAge" [(ngModel)]="userParams.minAge">
     </div>
+    <div class="form-group px-2">
+      <label for="">Age To</label>
+      <input type="number" style="width: 70px;" class="form-control ml-1" name="maxAge" [(ngModel)]="userParams.maxAge">
+    </div>
+    <div class="form-group px-2">
+      <label for="">Show</label>
+      <label for=""></label>
+      <select style="width: 130px;" class="form-control form-select ml-1" name="employerOrEmployee" [(ngModel)]="userParams.employerOrEmployee">
+        <option *ngFor="let employerOrEmployee of employerOrEmployeeList" [value]="employerOrEmployee.value">{{employerOrEmployee.display}}</option>
+      </select>
+    </div>
+    <div class="form-group px-2">
+      <label for="">Profession</label>
+      <select style="width: 130px;" class="form-control form-select ml-1" name="profession" [(ngModel)]="userParams.profession">
+        <option *ngFor="let profession of professionList" [value]="profession.value">{{profession.display}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary ml-1">Apply Filters</button>
+    <button (click)="resetFilters()" type="button" class="btn btn-info ml-1">Reset Filters</button>
+  </form>
+</div>
     
   <div class="col-2 mt-2" *ngFor="let member of members">
     <app-member-card [memberCard] = "member"></app-member-card>
   </div>
 
   <div class=" pagination d-flex justify-content-center" *ngIf="pagination">
-
     <pagination
     class="page-item"
     [boundaryLinks]="true"
@@ -26,7 +58,4 @@
     lastText="&raquo;"
     >
   </pagination>
-
-
-
 </div>

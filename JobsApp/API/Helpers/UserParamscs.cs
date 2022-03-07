@@ -19,10 +19,10 @@ namespace API.Helpers
 
          public int MinAge { get; set; } = 18;
          public int MaxAge { get; set; } = 150;
-         
-         
-         
-         
-         
+
+         public string Profession { get; set; } = "Default";
+
+        public string OrderBy { get; set; } = "lastAvtive";
+        
     }
 }

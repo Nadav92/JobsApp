@@ -44,7 +44,8 @@ namespace API.Controllers
                 Username = user.UserName,
                 Token = _tokenService.CreatToken(user),
                 KnownAs = user.KnownAs,
-                EmployerOrEmployee = user.EmployerOrEmployee
+                EmployerOrEmployee = user.EmployerOrEmployee,
+                Profession = user.Profession,
             };
         }
 
@@ -71,7 +72,8 @@ namespace API.Controllers
                 Token = _tokenService.CreatToken(user),
                 PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
                 EmployerOrEmployee = user.EmployerOrEmployee,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Profession = user.Profession
             };
         }
 

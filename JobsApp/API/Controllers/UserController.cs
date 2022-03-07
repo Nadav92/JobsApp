@@ -36,7 +36,9 @@ namespace API.Controllers
             {
                 userParams.EmployerOrEmployee = user.EmployerOrEmployee == "Employee" ? "Employer" : "Employee";
             }
+
             userParams.CurrentUsername = user.UserName;
+
 
             var users = await _userRepository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(
