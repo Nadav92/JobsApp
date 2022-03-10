@@ -45,9 +45,9 @@ export class MembersService {
     let params = this.getPaginationHeaders(userParams);
     params = params.append('minAge', userParams.minAge.toString());
     params = params.append('maxAge', userParams.maxAge.toString());
+    params = params.append('orderBy', userParams.orderBy);
     params = params.append('employerOrEmployee', userParams.employerOrEmployee);
     params = params.append('profession', userParams.profession);
-    params = params.append('orderBy', userParams.orderBy);
 
     return this.getPaginatedResult<Member[]>(`${this.baseUrl}users`, params)
     .pipe(

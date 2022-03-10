@@ -37,7 +37,6 @@
     </div>
     <button type="submit" class="btn btn-success ml-1">Apply Filters</button>
     <button (click)="resetFilters()" type="button" class="btn btn-secondary ml-1">Reset Filters</button>
-    <div class="col">
       <div class="btn-group flaot-right">
         <button 
         type="button" 
@@ -48,6 +47,7 @@
         [(ngModel)]="userParams.orderBy">
         Last Active
         </button>
+
         <button 
         type="button" 
         class="btn btn-primary" 
@@ -58,7 +58,6 @@
         Newest Member
         </button>
       </div>
-    </div>
   </form>
 </div>
 

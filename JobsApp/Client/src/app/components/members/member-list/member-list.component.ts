@@ -71,7 +71,7 @@ export class MemberListComponent implements OnInit {
       res => {
         this.members = res.result;
         this.pagination = res.pagination;
-        this.pagination.currentPage = 1;
+      
       }
     )
   }
@@ -79,12 +79,8 @@ export class MemberListComponent implements OnInit {
   pageChanged({ page }: any) {
     this.userParams.pageNumber = page;
     this.memberService.UserParams = this.userParams;
-    this.memberService.getMembers(this.userParams).subscribe(
-      res => {
-        this.members = res.result;
-        this.pagination = res.pagination;
-      }
-    )
+    this.loadMembers()
+
   }
 
   resetFilters(){
