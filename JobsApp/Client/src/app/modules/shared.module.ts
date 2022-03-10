@@ -9,6 +9,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {FileUploadModule} from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { FormsModule } from '@angular/forms';
       positionClass: 'toast-bottom-right'
     }),
     BsDatepickerModule.forRoot(),
+    ButtonsModule.forRoot(),
     // PaginationModule.forRoot()
+    TimeagoModule.forRoot()
   ],
   declarations: [],
   exports:[
@@ -35,7 +39,9 @@ import { FormsModule } from '@angular/forms';
     TabsModule,
     BsDatepickerModule,
     PaginationModule,
-    FormsModule
+    FormsModule,
+    ButtonsModule,
+    TimeagoModule
   ]
 })
 

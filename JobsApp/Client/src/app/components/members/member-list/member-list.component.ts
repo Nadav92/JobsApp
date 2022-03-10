@@ -53,17 +53,11 @@ export class MemberListComponent implements OnInit {
     }
   ];
 
-  // public professionArr = ['All', 'Security', 'Catering', 'Hi-Tec', 'Medicine'];
 
   constructor
-    (private memberService: MembersService,
-      private toastr: ToastrService,
-      private accountService: AccountService
+    (private memberService: MembersService
     ) {
-      accountService.currentUser$.pipe(take(1)).subscribe((user:any) => {
-        this.user = user;
-        this.userParams = new UserParams(user);
-      });
+    this.userParams = this.memberService.UserParams;
   }
 
   ngOnInit() {
@@ -72,6 +66,19 @@ export class MemberListComponent implements OnInit {
   }
 
   loadMembers() {
+    this.memberService.UserParams = this.userParams;
+    this.memberService.getMembers(this.userParams).subscribe(
+      res => {
+        this.members = res.result;
+        this.pagination = res.pagination;
+        this.pagination.currentPage = 1;
+      }
+    )
+  }
+
+  pageChanged({ page }: any) {
+    this.userParams.pageNumber = page;
+    this.memberService.UserParams = this.userParams;
     this.memberService.getMembers(this.userParams).subscribe(
       res => {
         this.members = res.result;
@@ -80,41 +87,11 @@ export class MemberListComponent implements OnInit {
     )
   }
 
-  pageChanged({ page }: any) {
-    this.userParams.pageNumber = page;
-    this.loadMembers();
-  }
-
   resetFilters(){
-    this.userParams = new UserParams(this.user);
+    this.userParams = this.memberService.resetUserParams();
     this.loadMembers();
   }
 
-
-  // profChanged(event: any) {
-  //   this.selectedProf = event.target.value;
-  //   for (let i = 0; i < this.members.length; i++) {
-
-  //     if (this.selectedProf == 'All') {
-  //       this.loadMembers();
-  //       break;
-  //     }
-
-  //     if (this.selectedProf != this.members[i].profession) {
-  //       this.memberService.getMembers(this.userParams).subscribe(
-  //         res => {
-  //           this.members = res.result.filter(items => items.profession == this.selectedProf);
-  //           this.pagination = res.pagination;
-  //           if (this.members.length == 0) this.toastr.error('Error - No Data, Refresh the page');
-  //         }
-  //       )
-  //     }
-  //   }
-  //   if (this.members.length == 0) {
-  //     this.toastr.error('Error - Load all users')
-  //     this.loadMembers();
-  //   }
-  // }
 }
 
 

@@ -35,7 +35,6 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
             query = query.Where(x => x.UserName != userParams.CurrentUsername);
             query = query.Where(x => x.EmployerOrEmployee == userParams.EmployerOrEmployee);
-
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
             query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);

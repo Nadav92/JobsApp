@@ -35,10 +35,33 @@
         <option *ngFor="let profession of professionList" [value]="profession.value">{{profession.display}}</option>
       </select>
     </div>
-    <button type="submit" class="btn btn-primary ml-1">Apply Filters</button>
-    <button (click)="resetFilters()" type="button" class="btn btn-info ml-1">Reset Filters</button>
+    <button type="submit" class="btn btn-success ml-1">Apply Filters</button>
+    <button (click)="resetFilters()" type="button" class="btn btn-secondary ml-1">Reset Filters</button>
+    <div class="col">
+      <div class="btn-group flaot-right">
+        <button 
+        type="button" 
+        class="btn btn-primary" 
+        name="orderBy" 
+        btnRadio="lastActive" 
+        (click)="loadMembers()"
+        [(ngModel)]="userParams.orderBy">
+        Last Active
+        </button>
+        <button 
+        type="button" 
+        class="btn btn-primary" 
+        name="orderBy" 
+        btnRadio="created" 
+        (click)="loadMembers()"
+        [(ngModel)]="userParams.orderBy">
+        Newest Member
+        </button>
+      </div>
+    </div>
   </form>
 </div>
+
     
   <div class="col-2 mt-2" *ngFor="let member of members">
     <app-member-card [memberCard] = "member"></app-member-card>

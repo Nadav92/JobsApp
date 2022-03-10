@@ -9,6 +9,7 @@ export class UserParams {
     pageNumber = 1;
     pageSize = 5;
     profession: Profession;
+    orderBy = 'lastActive';
 
     constructor ({employerOrEmployee , profession} : User) {
         this.employerOrEmployee = employerOrEmployee === EmployerOrEmployee.Employee ? EmployerOrEmployee.Employer : EmployerOrEmployee.Employee;
