@@ -39,12 +39,6 @@ namespace API.Data
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
             query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
 
-            query = userParams.OrderBy switch
-            {
-                 "created" => query.OrderByDescending(x => x.Created),
-                _ => query.OrderByDescending(x => x.LastActive) 
-            };
-
             query = userParams.Profession switch
             {
                 "Security" => query.Where(x => x.Profession == "Security"),
@@ -52,6 +46,12 @@ namespace API.Data
                 "Hi-Tec" => query.Where(x => x.Profession == "Hi-Tec"),
                 "Medicine" => query.Where(x => x.Profession == "Medicine"),
                  _ => query.OrderByDescending(x => x.Profession == userParams.Profession)
+            };
+
+            query = userParams.OrderBy switch
+            {
+                 "created" => query.OrderByDescending(x => x.Created),
+                _ => query.OrderByDescending(x => x.LastActive) 
             };
             
             return await PagedList<MemberDto>.CreateAsync
