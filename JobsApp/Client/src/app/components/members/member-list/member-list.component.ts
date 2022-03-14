@@ -80,7 +80,6 @@ export class MemberListComponent implements OnInit {
     this.userParams.pageNumber = page;
     this.memberService.UserParams = this.userParams;
     this.loadMembers()
-
   }
 
   resetFilters(){
