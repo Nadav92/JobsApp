@@ -15,6 +15,8 @@ import { NgForm } from '@angular/forms';
 export class MemberEditComponent implements OnInit {
   member: Member;
   user: User;
+  isEmployeeSwitch = false;
+
   public professionArr = [
     {
       name: "Security",
@@ -48,9 +50,9 @@ export class MemberEditComponent implements OnInit {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user as User
     });
-    
+
   }
-  
+
   ngOnInit() {
     this.loadMember();
   }
@@ -68,6 +70,10 @@ export class MemberEditComponent implements OnInit {
       this.editGeneral.reset(this.member);
       this.editResume.reset(this.member);
     })
+  }
+
+  employeeCheckBox() {
+    this.isEmployeeSwitch = this.isEmployeeSwitch == false ? true : false;
   }
 
 }

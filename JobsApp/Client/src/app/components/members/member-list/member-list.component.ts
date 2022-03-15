@@ -71,7 +71,6 @@ export class MemberListComponent implements OnInit {
       res => {
         this.members = res.result;
         this.pagination = res.pagination;
-      
       }
     )
   }
