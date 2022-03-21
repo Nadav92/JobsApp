@@ -11,10 +11,13 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { MemberCardComponent } from '../components/members/member-card/member-card.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
   imports: [
+    RouterModule,
     FileUploadModule,
     NgxSpinnerModule,
     NgxGalleryModule,
@@ -29,8 +32,9 @@ import { TimeagoModule } from 'ngx-timeago';
     PaginationModule.forRoot(),
     TimeagoModule.forRoot()
   ],
-  declarations: [],
+  declarations: [MemberCardComponent],
   exports:[
+    MemberCardComponent,
     FileUploadModule,
     NgxSpinnerModule,
     NgxGalleryModule,
