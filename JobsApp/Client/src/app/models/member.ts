@@ -24,4 +24,5 @@ export interface Member {
     photos:             Photo[];
     photoUrl:           string;
     profession:         string;
+    isLike:             boolean;
 }

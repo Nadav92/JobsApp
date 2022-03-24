@@ -85,7 +85,7 @@ export class MembersService {
     return this.userParams;
   }
 
-  addLikes(username: string) {
+  toggleLikes(username: string) {
     const url = `${this.baseUrl}likes/${username}`;
     return this.http.post(url, {});
   }
