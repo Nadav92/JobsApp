@@ -18,15 +18,15 @@ export class MemberCardComponent implements OnInit {
   @Input() memberCard!: Member;
   @Output() onChange = new EventEmitter<void>();
 
-  isLike =  false;
+
   ngOnInit() {
   }
   
   toggleLike(member: Member){
     this.membersService.toggleLikes(member.username).subscribe((liked) => {
-      this.toastr.success(`You have ` + (liked ? `liked `  : `dislike `) + member.knownAs);
-      this.isLike = liked ? true : false ;
-      console.log(this.isLike);
+      liked? 
+      this.toastr.success(`You have Like ` + member.knownAs ) :
+      this.toastr.error(`You have Dislike ` + member.knownAs )
       this.onChange.next();
     })
   }
