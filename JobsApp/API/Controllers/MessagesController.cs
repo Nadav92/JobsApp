@@ -36,13 +36,13 @@ namespace API.Controllers
         public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
         {
             var username = User.GetUsername();
-            if (username == createMessageDto.RescipientUsername.ToLower())
+            if (username == createMessageDto.RecipientUsername.ToLower())
             {
                 return BadRequest("You cant send message to yourself");
             }
 
             var sender = await _userRepository.GetUserByUserNameAsync(username);
-            var recipient = await _userRepository.GetUserByUserNameAsync(createMessageDto.RescipientUsername);
+            var recipient = await _userRepository.GetUserByUserNameAsync(createMessageDto.RecipientUsername);
             if (recipient == null) return NotFound();
 
             var message = new Message
@@ -53,7 +53,9 @@ namespace API.Controllers
                 RecipientUsername = recipient.UserName,
                 SenderKnownAs = sender.KnownAs,
                 RecipientKnownAs = recipient.KnownAs,
-                Content = createMessageDto.Content
+                Content = createMessageDto.Content,
+                EmployerOrEmployee = recipient.EmployerOrEmployee
+
             };
 
             _messagesRepository.AddMessage(message);

@@ -52,6 +52,8 @@ namespace API.Data
                 _ => query.Where(u => u.Recipient.UserName == messageParams.Username && u.DateRead == null),
             };
 
+           
+
             var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
             return await PagedList<MessageDto>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
         }
@@ -64,7 +66,7 @@ namespace API.Data
             .Where(m =>
                 m.RecipientUsername == currentUsername && m.SenderUsername == recipientUsername ||
                 m.SenderUsername == currentUsername && m.RecipientUsername == recipientUsername)
-            .OrderBy(m => m.MessageSent)
+            .OrderByDescending(m => m.MessageSent)
             .ToListAsync();
 
             if(await updateUnread(messages, currentUsername) == -1){

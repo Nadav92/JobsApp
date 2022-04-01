@@ -93,21 +93,21 @@
             <form #editResume="ngForm" (ngSubmit)="updtaeMember()" id="editResume"  >
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="isEmployeeSwitch" (click)="employeeCheckBox()" [(ngModel)]="isEmployeeSwitch">
-                <label class="form-check-label" for="isEmployeeSwitch">You Are Employee?</label>
+                <label class="form-check-label" for="isEmployeeSwitch">do you want to add Resume?</label>
               </div>
               <div *ngIf="isEmployeeSwitch == true">
                 <h4 class="mt-2">professional Summary</h4>
                 <textarea [(ngModel)]="member.professionalSummary" name="professionalSummary" class="form-control" rows="6"></textarea>
-                <h4 class="mt-2">Education</h4>
-                <textarea [(ngModel)]="member.education" name="education" class="form-control" rows="4"></textarea>
+                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Education</h4>
+                <textarea [(ngModel)]="member.education" name="education" class="form-control" rows="4" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
                 <h4 class="mt-2">professional History</h4>
                 <textarea [(ngModel)]="member.professionalHistory" name="professionalHistory" class="form-control" rows="6"></textarea>
-                <h4 class="mt-2">Skills</h4>
-                <textarea [(ngModel)]="member.skills" name="skills" class="form-control" rows="3"></textarea>
-                <h4 class="mt-2">Languages</h4>
-                <textarea [(ngModel)]="member.languages" name="languages" class="form-control" rows="2"></textarea>
-                <h4 class="mt-2">Military Service</h4>
-                <textarea [(ngModel)]="member.militaryService" name="militaryService" class="form-control" rows="2"></textarea>
+                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Skills</h4>
+                <textarea [(ngModel)]="member.skills" name="skills" class="form-control" rows="3" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+                <h4 class="mt-2"*ngIf="member.employerOrEmployee == 'Employee'">Languages</h4>
+                <textarea [(ngModel)]="member.languages" name="languages" class="form-control" rows="2" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Military Service</h4>
+                <textarea [(ngModel)]="member.militaryService" name="militaryService" class="form-control" rows="2" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
               </div>
             </form>
           </tab>

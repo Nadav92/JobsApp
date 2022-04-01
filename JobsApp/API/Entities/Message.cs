@@ -30,5 +30,7 @@ namespace API.Entities
 
         public string SenderKnownAs { get; set; }
         public string RecipientKnownAs { get; set; }
+        public string EmployerOrEmployee { get; set; }
+
     }
 }

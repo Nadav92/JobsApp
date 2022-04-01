@@ -9,7 +9,9 @@ export class Message{
     content: string;
     dateRead: Date;
     messageSent: Date;
-
     senderKnownAs: string;
     recipientKnownAs: string;
+
+    ///recipient
+    employerOrEmployee : string;
 }

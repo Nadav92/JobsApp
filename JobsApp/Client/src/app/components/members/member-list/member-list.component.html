@@ -4,7 +4,7 @@
     <h2>Your search found {{pagination?.totalItems}} results </h2>
   </div>
   
-<div class="container mr-3" >
+<div class="container ml-5" >
   <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
     <div class="form-group px-2">
       <label for="">Age From</label>
@@ -30,7 +30,7 @@
     <button type="submit" class="btn btn-success ml-1">Apply Filters</button>
     <button (click)="resetFilters()" type="button" class="btn btn-secondary ml-1">Reset Filters</button>
     <div class="col">
-      <div class="btn-group flaot-right">
+      <div class="btn-form flaot-right">
         <button 
           type="button" 
           class="btn btn-primary" 
@@ -43,7 +43,7 @@
 
         <button 
           type="button" 
-          class="btn btn-primary" 
+          class="btn btn-primary ml-1" 
           name="orderBy" 
           btnRadio="created" 
           (click)="loadMembers()"
