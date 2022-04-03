@@ -3,6 +3,7 @@ import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { getPaginatedResult, getPaginationParams } from './paginationHelper';
 import { Message } from '../models/message';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,10 @@ export class MessageService {
   sendMessage(username: string, content: string) {
     const createMessgae = { recipientUsername: username, content: content }
     return this.http.post(`${this.baseUrl}messages`, createMessgae)
+  }
+
+  deleteMessage(id: number): Observable<any>{
+    return this.http.delete(`${this.baseUrl}messages/${id}`);
   }
 
 }
