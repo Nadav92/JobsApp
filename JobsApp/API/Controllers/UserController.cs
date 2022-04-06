@@ -1,5 +1,4 @@
 using System.Linq;
-using System.Security.Claims;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -27,6 +26,7 @@ namespace API.Controllers
             _userRepository = userRepository;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
         {
@@ -49,6 +49,7 @@ namespace API.Controllers
                 );
             return Ok(users);
         }
+
 
         [HttpGet("{username}", Name = "GetUser")] // api/users/name
         public async Task<ActionResult<MemberDto>> GetUser(string username)

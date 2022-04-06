@@ -7,12 +7,16 @@
           <li class="nav-item" >
             <a *ngIf="user.employerOrEmployee == 'Employee'" class="nav-link" routerLinkActive="active" routerLink="/members" >Find Job</a>
             <a *ngIf="user.employerOrEmployee == 'Employer'" class="nav-link" routerLinkActive="active" routerLink="/members" >Find Employee</a>
+           
            </li>
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/lists">Lists</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/messages">Messages</a>
+          </li>  
+          <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/admin">Admin</a>
           </li>
         </ng-container>
         <li class="nav-item">
@@ -22,7 +26,7 @@
 
       <div class="dropdown" *ngIf="currentUser$ | async as user" dropdown>
         <img class="img" src="{{user.photoUrl || '/assets/user.png'}}" alt="{{user.username}}">
-        <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.knownAs | titlecase }}</a>
+        <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.knownAs || user.username | titlecase }}</a>
 
         <div class="dropdown-menu" *dropdownMenu>
           <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>

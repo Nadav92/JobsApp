@@ -6,13 +6,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
-import {FileUploadModule} from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 import { MemberCardComponent } from '../components/members/member-card/member-card.component';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -30,10 +31,11 @@ import { RouterModule } from '@angular/router';
     BsDatepickerModule.forRoot(),
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [MemberCardComponent],
-  exports:[
+  exports: [
     MemberCardComponent,
     FileUploadModule,
     NgxSpinnerModule,
@@ -45,7 +47,8 @@ import { RouterModule } from '@angular/router';
     PaginationModule,
     FormsModule,
     ButtonsModule,
-    TimeagoModule
+    TimeagoModule,
+    ModalModule
   ]
 })
 

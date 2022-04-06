@@ -22,6 +22,11 @@ import { MemberEditComponent } from './components/member-edit/member-edit.compon
 import { PhotoEditorComponent } from './components/member-edit/photo-editor/photo-editor.component';
 import { TextInputComponent } from './components/forms/text-input/text-input.component';
 import { DateInputComponent } from './components/forms/date-input/date-input.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './directives/has-role.directive';
+import { UserManagmentComponent } from './components/admin/user-managment/user-managment.component';
+import { PhotoManagmentComponent } from './components/admin/photo-managment/photo-managment.component';
+import { RolesMoadlComponent } from './modals/roles-moadl/roles-moadl.component';
 
 
 @NgModule({
@@ -38,7 +43,12 @@ import { DateInputComponent } from './components/forms/date-input/date-input.com
     MemberEditComponent,
     PhotoEditorComponent,
     TextInputComponent,
-    DateInputComponent
+    DateInputComponent,
+    AdminPanelComponent,
+    HasRoleDirective,
+    UserManagmentComponent,
+    PhotoManagmentComponent,
+    RolesMoadlComponent
    ],
   imports: [
     ReactiveFormsModule,
@@ -68,5 +78,6 @@ import { DateInputComponent } from './components/forms/date-input/date-input.com
     }
   ],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

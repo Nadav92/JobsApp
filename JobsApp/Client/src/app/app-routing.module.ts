@@ -1,3 +1,5 @@
+import { AdminGuard } from './guards/admin.guard';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { MemberEditComponent } from './components/member-edit/member-edit.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,8 +21,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
     runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'members',
@@ -29,6 +31,7 @@ const routes: Routes = [
       {path: 'member/edit',component: MemberEditComponent , canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'lists',component: ListsComponent},
       {path: 'messages',component: MessagesComponent},
+      {path: 'admin',component: AdminPanelComponent, canActivate: [AdminGuard]},
     ]
   },
   {

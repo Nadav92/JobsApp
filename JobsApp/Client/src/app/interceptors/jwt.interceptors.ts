@@ -12,7 +12,7 @@ export class JwtInterceptor implements HttpInterceptor {
     constructor(private account: AccountService) { }
 
     intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-        let currenteUser: User = { token: '', username: '' , photoUrl: '', employerOrEmployee: EmployerOrEmployee.Employee, knownAs: '', profession: Profession.Default};
+        let currenteUser: User = { token: '', username: '' , photoUrl: '', employerOrEmployee: EmployerOrEmployee.Employee, knownAs: '', profession: Profession.Default, roles:[]};
 
         this.account.currentUser$.pipe(take(1)).subscribe((user: User | null) => { if (user) currenteUser = user });
         if (currenteUser.token) {

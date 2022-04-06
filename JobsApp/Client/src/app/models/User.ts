@@ -8,4 +8,5 @@ export interface User{
     knownAs: string;
     employerOrEmployee: EmployerOrEmployee;
     profession: Profession;
+    roles: string [];
 }
