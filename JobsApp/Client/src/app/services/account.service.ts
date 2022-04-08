@@ -1,3 +1,4 @@
+import { PresenceService } from './presence.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, ReplaySubject } from 'rxjs';
@@ -12,7 +13,7 @@ export class AccountService {
   private curentUserSource$ = new ReplaySubject<User | null>(1);
   currentUser$ = this.curentUserSource$.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private presence : PresenceService) { }
 
   setCurrentUser(user: User){
     user.roles = [];
@@ -20,6 +21,7 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.curentUserSource$.next(user);
+    this.presence.createHubConnection(user);
   }
 
   login(model: any) {
@@ -29,6 +31,7 @@ export class AccountService {
           const user = response;
           if (user) {
             this.setCurrentUser(user);
+            this.presence.createHubConnection(user);
           }
         }));
   }
@@ -36,6 +39,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.curentUserSource$.next(null);
+    this.presence.stopHubConnection();
   }
 
   register(model: any){
@@ -44,6 +48,7 @@ export class AccountService {
       map((user: User) => {
         if(user){
           this.setCurrentUser(user);
+          this.presence.createHubConnection(user);
         }
          return user;
       })

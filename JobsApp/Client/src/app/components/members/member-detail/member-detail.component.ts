@@ -1,12 +1,15 @@
+import { AccountService } from './../../../services/account.service';
+import { PresenceService } from './../../../services/presence.service';
 import { Message } from './../../../models/message';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgxGalleryAnimation, NgxGalleryImage, NgxGalleryOptions } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { Member } from 'src/app/models/member';
 import { MembersService } from 'src/app/services/members.service';
 import { MessageService } from 'src/app/services/Message.service';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-member-detail',
@@ -21,12 +24,18 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   activeTab: TabDirective;
   messages: Message[] = [];
   subscription: Subscription;
+  user : User;
 
   constructor(
-    private memberService: MembersService,
+    public presence: PresenceService,
     private route: ActivatedRoute,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService,
+    private accountService:AccountService,
+    private router: Router
+  ) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user as User)
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -50,9 +59,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     ];
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+ 
 
   getImages(): NgxGalleryImage[] {
     const imgUrls: NgxGalleryImage[] = [];
@@ -69,8 +76,15 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   onTabActivated(data: TabDirective) {
     this.activeTab = data;
     if (this.activeTab.heading === 'Messages' && this.messages.length === 0){
-      this.loadMesages();
+      this.messageService.createHubConnection(this.user, this.member.username);
+    }else {
+      this.messageService.stopHubConnection();
     } 
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.messageService.stopHubConnection();
   }
 
   loadMesages() {
