@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using API.Data;
 using API.Extensions;
@@ -41,6 +42,11 @@ namespace API
 
             services.AddIdentityServices(_config);
             services.AddSignalR();
+            // services.AddSignalR(hubOptions =>
+            //     {
+            //         hubOptions.EnableDetailedErrors = true;
+            //         // hubOptions.KeepAliveInterval = TimeSpan.FromMinutes(1);
+            //     });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

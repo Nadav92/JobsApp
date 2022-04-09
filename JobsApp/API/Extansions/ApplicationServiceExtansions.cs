@@ -1,3 +1,4 @@
+using System;
 using API.Data;
 using API.Helpers;
 using API.Interfaces;
@@ -11,23 +12,24 @@ namespace API.Extensions
 {
     public static class ApplicationServiceExtansions
     {
-       public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddSingleton<PresenceTracker>();
-            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             // services.AddScoped<IMessagesRepository, MessagesRepository>();
             // services.AddScoped<ILikesRepository, LikesRepository>();
-            services.AddScoped<LogUserActivity>();
-            services.AddScoped<ITokenService, TokenService>();
             // services.AddScoped<IUserRepository , UserRepository>();
+            services.AddSingleton<PresenceTracker>();
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"))
             );
+
+  
+
 
             return services;
         }

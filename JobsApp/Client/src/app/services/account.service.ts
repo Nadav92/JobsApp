@@ -13,9 +13,9 @@ export class AccountService {
   private curentUserSource$ = new ReplaySubject<User | null>(1);
   currentUser$ = this.curentUserSource$.asObservable();
 
-  constructor(private http: HttpClient, private presence : PresenceService) { }
+  constructor(private http: HttpClient, private presence: PresenceService) { }
 
-  setCurrentUser(user: User){
+  setCurrentUser(user: User) {
     user.roles = [];
     const roles = this.getDecodedToken(user.token).role;
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
@@ -33,7 +33,8 @@ export class AccountService {
             this.setCurrentUser(user);
             this.presence.createHubConnection(user);
           }
-        }));
+        })
+      );
   }
 
   logout() {
@@ -42,20 +43,20 @@ export class AccountService {
     this.presence.stopHubConnection();
   }
 
-  register(model: any){
+  register(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/register', model)
-    .pipe(
-      map((user: User) => {
-        if(user){
-          this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
-        }
-         return user;
-      })
-    )
+      .pipe(
+        map((user: User) => {
+          if (user) {
+            this.setCurrentUser(user);
+            this.presence.createHubConnection(user);
+          }
+          return user;
+        })
+      )
   }
 
-  getDecodedToken(token: any){
+  getDecodedToken(token: any) {
     // return JSON.parse(atob(token.split('.')[1]))
     const tokenParts = token.split('.');
     const payload = tokenParts[1];
@@ -63,5 +64,5 @@ export class AccountService {
     return JSON.parse(decodedPayload);
   }
 
-  
+
 }

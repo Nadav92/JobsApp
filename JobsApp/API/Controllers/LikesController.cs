@@ -34,8 +34,11 @@ namespace API.Controllers
             var sourceUserId = User.GetUserId();
             var likedUser = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
             var sourceUser = await _unitOfWork.LikesRepository.GetUserWithLikes(sourceUserId);
+
             if (likedUser == null) return NotFound();
+
             if (sourceUser.UserName == username) return BadRequest("You can't like yourself");
+            
             var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
             // if (userLike != null) return BadRequest("You alradey like this user");
 

@@ -97,13 +97,14 @@ namespace API.Data
             .Where(m =>
                 (m.Recipient.UserName == currentUsername && !m.RecipientDeleted) ||
                 (m.Sender.UserName == currentUsername && !m.SenderDeleted))
-            .OrderByDescending(m => m.MessageSent)
+            .OrderBy(m => m.MessageSent)
             .ToListAsync();
 
             if (await updateUnread(messages, currentUsername) == -1)
             {
                 throw new Exception("Could not save to DB all the data");
             }
+            
             return _mapper.Map<IEnumerable<MessageDto>>(messages);
         }
 
@@ -119,14 +120,14 @@ namespace API.Data
 
         private async Task<int> updateUnread(List<Message> messages, string currentUsername)
         {
-            var unReadMessages = messages.Where(m => m.DateRead == null &&
+            var unreadMessages = messages.Where(m => m.DateRead == null &&
                        m.Recipient.UserName == currentUsername).ToList();
 
-            if (unReadMessages.Any())
+            if (unreadMessages.Any())
             {
-                foreach (var um in unReadMessages) um.DateRead = DateTime.UtcNow;
+                foreach (var um in unreadMessages) um.DateRead = DateTime.UtcNow;
                 var rtn = await _context.SaveChangesAsync();
-                if (rtn < unReadMessages.Count) return -1;
+                if (rtn < unreadMessages.Count) return -1;
             }
             return 1;
         }

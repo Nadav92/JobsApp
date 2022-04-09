@@ -7,7 +7,6 @@ import { getPaginatedResult, getPaginationParams } from './paginationHelper';
 import { Message } from '../models/message';
 import { Observable, BehaviorSubject, take } from 'rxjs';
 import { User } from '../models/User';
-import { group } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +22,11 @@ export class MessageService {
 
   createHubConnection(user:User, otherUsername:string){
     this.hubConnection = new HubConnectionBuilder()
-    .withUrl(`${this.hubUrl}message?user=${otherUsername}`, {accessTokenFactory: () => user.token})
+    .withUrl(`${this.hubUrl}message?username=${otherUsername}`, {accessTokenFactory: () => user.token})
     .withAutomaticReconnect()
     .build();
+    
+               
 
     this.hubConnection.start().catch(err => console.log(err));
 
@@ -70,8 +71,8 @@ export class MessageService {
   }
 
   async sendMessage(username: string, content: string) {
-    const createMessgae = { recipientUsername: username, content: content }
-    return this.hubConnection.invoke('SendMessage', createMessgae)
+    const createMessage = { recipientUsername: username, content: content }
+    return this.hubConnection.invoke('SendMessage', createMessage)
     .catch(err => console.log(err));
   }
 

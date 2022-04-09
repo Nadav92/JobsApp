@@ -21,7 +21,7 @@ namespace API.Controllers
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService, IUnitOfWork unitOfWork)
+        public UsersController(IMapper mapper, IPhotoService photoService, IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
             _photoService = photoService;
@@ -66,11 +66,12 @@ namespace API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
         {
-            var username = User.GetUsername();
-            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(username);
+            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
 
             _mapper.Map(memberUpdateDto, user);
+
             _unitOfWork.UserRepository.Update(user);
+            
             if (await _unitOfWork.Complete())
             {
                 return NoContent();

@@ -1,29 +1,6 @@
-<div class="card-footer">
-  <form #messageForm="ngForm"
-        (ngSubmit)="sendMessage(messageForm)"
-        autocomplete="off">
-    <div class="input-group">
-      <input 
-      name="messageConetnt"
-      required
-      [(ngModel)]="messageContent"
-      type="text"
-             class="form-control input-sm"
-             placeholder="Send a private message">
-      <div class="input-group-append">
-        <button 
-        [disabled]="!messageForm.valid"
-        class="btn btn-primary"
-                type="submit">Send</button>
-      </div>
-    </div>
-  </form>
-</div>
-
-
 <div class="card">
   <div class="card-body">
-    <ng-container *ngIf="(messageService.messageThread$ | async) && messages.length; else noMessages">
+    <ng-container *ngIf="(messageService.messageThread$ | async); else noMessages">
       <ul class="chat">
         <li *ngFor="let message of (messageService.messageThread$ | async)">
           <span class="chat-img float-right">
@@ -55,7 +32,26 @@
     </ng-container>
     <ng-template #noMessages>No messages yet.. say Hi to using the message box bellow</ng-template>
   </div>
+</div>
 
-
-
+<div class="card-footer">
+  <form #messageForm="ngForm"
+        (ngSubmit)="sendMessage(messageForm)"
+        autocomplete="off">
+    <div class="input-group">
+      <input 
+      name="messageConetnt"
+      required
+      [(ngModel)]="messageContent"
+      type="text"
+             class="form-control input-sm"
+             placeholder="Send a private message">
+      <div class="input-group-append">
+        <button 
+        [disabled]="!messageForm.valid"
+        class="btn btn-primary"
+                type="submit">Send</button>
+      </div>
+    </div>
+  </form>
 </div>
