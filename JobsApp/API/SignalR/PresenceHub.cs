@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace API.SignalR
 {
-    public class PresenceHub : Hub
+    public class PresenceHub : Hub 
     {
         private readonly PresenceTracker _tracker;
         public PresenceHub(PresenceTracker tracker)

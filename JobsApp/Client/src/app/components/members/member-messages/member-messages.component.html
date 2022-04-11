@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <ng-container *ngIf="(messageService.messageThread$ | async); else noMessages">
+    <ng-container *ngIf="(messageService.messageThread$ | async)?.length; else noMessages">
       <ul class="chat">
         <li *ngFor="let message of (messageService.messageThread$ | async)">
           <span class="chat-img float-right">

@@ -21,7 +21,6 @@ export class AccountService {
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.curentUserSource$.next(user);
-    this.presence.createHubConnection(user);
   }
 
   login(model: any) {

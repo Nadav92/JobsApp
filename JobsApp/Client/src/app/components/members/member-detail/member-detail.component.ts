@@ -87,11 +87,11 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
     this.messageService.stopHubConnection();
   }
 
-  loadMesages() {
-    this.messageService.getMessageThread(this.member.username).subscribe(m => {
-      this.messages = m;
-    })
-  }
+  // loadMesages() {
+  //   this.messageService.getMessageThread(this.member.username).subscribe(m => {
+  //     this.messages = m;
+  //   })
+  // }
 
   selectTab(tabId: number) {
     this.memberTabs.tabs[tabId].active = true;
