@@ -62,21 +62,17 @@ namespace API.Data
         {
             var query = _context.Messages
             .OrderByDescending(m => m.MessageSent)
+            .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
             .AsQueryable();
 
             query = messageParams.Container switch
             {
-                "Inbox" => query.Where(u => u.Recipient.UserName == messageParams.Username),
-                "Outbox" => query.Where(u => u.Sender.UserName == messageParams.Username),
-                _ => query.Where(u => u.Recipient.UserName == messageParams.Username && u.DateRead == null),
+                "Inbox" => query.Where(u => u.RecipientUsername == messageParams.Username && !u.RecipientDeleted),
+                "Outbox" => query.Where(u => u.SenderUsername == messageParams.Username && !u.SenderDeleted),
+                _ => query.Where(u => u.RecipientUsername == messageParams.Username && !u.RecipientDeleted && u.DateRead == null),
             };
 
-            query = query.Where(m =>
-                    (m.Recipient.UserName == messageParams.Username && !m.RecipientDeleted) ||
-                    (m.Sender.UserName == messageParams.Username && !m.SenderDeleted));
-
-            var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
-            return await PagedList<MessageDto>.CreateAsync(messages, messageParams.PageNumber, messageParams.PageSize);
+            return await PagedList<MessageDto>.CreateAsync(query, messageParams.PageNumber, messageParams.PageSize);
         }
 
         public async Task<Group> GetMessageGroup(string groupName)
@@ -89,8 +85,6 @@ namespace API.Data
         public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUsername, string recipientUsername)
         {
             var messages = await _context.Messages
-            .Include(u => u.Sender).ThenInclude(p => p.Photos)
-            .Include(u => u.Recipient).ThenInclude(p => p.Photos)
             .Where(m =>
                 m.RecipientUsername == currentUsername && m.SenderUsername == recipientUsername ||
                 m.SenderUsername == currentUsername && m.RecipientUsername == recipientUsername)
@@ -98,14 +92,20 @@ namespace API.Data
                 (m.Recipient.UserName == currentUsername && !m.RecipientDeleted) ||
                 (m.Sender.UserName == currentUsername && !m.SenderDeleted))
             .OrderBy(m => m.MessageSent)
+            .ProjectTo<MessageDto>(_mapper.ConfigurationProvider)
             .ToListAsync();
-
-            if (await updateUnread(messages, currentUsername) == -1)
-            {
-                throw new Exception("Could not save to DB all the data");
-            }
             
-            return _mapper.Map<IEnumerable<MessageDto>>(messages);
+            var unreadMessages = messages.Where(m => m.DateRead == null &&
+                       m.RecipientUsername == currentUsername).ToList();
+
+            if (unreadMessages.Any())
+            {
+                foreach (var um in unreadMessages) um.DateRead = DateTime.UtcNow;
+                
+            }
+
+            
+            return messages;
         }
 
         public void RemoveConnection(Connection connection)
@@ -118,18 +118,18 @@ namespace API.Data
         //     return await _context.SaveChangesAsync() > 0;
         // }
 
-        private async Task<int> updateUnread(List<Message> messages, string currentUsername)
-        {
-            var unreadMessages = messages.Where(m => m.DateRead == null &&
-                       m.Recipient.UserName == currentUsername).ToList();
+        // private async Task<int> updateUnread(List<Message> messages, string currentUsername)
+        // {
+        //     var unreadMessages = messages.Where(m => m.DateRead == null &&
+        //                m.Recipient.UserName == currentUsername).ToList();
 
-            if (unreadMessages.Any())
-            {
-                foreach (var um in unreadMessages) um.DateRead = DateTime.UtcNow;
-                var rtn = await _context.SaveChangesAsync();
-                if (rtn < unreadMessages.Count) return -1;
-            }
-            return 1;
-        }
+        //     if (unreadMessages.Any())
+        //     {
+        //         foreach (var um in unreadMessages) um.DateRead = DateTime.UtcNow;
+        //         var rtn = await _context.SaveChangesAsync();
+        //         if (rtn < unreadMessages.Count) return -1;
+        //     }
+        //     return 1;
+        // }
     }
 }

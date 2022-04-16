@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace API.DTOs
 {
@@ -19,7 +20,9 @@ namespace API.DTOs
         public string SenderKnownAs { get; set; }
         public string RecipientKnownAs { get; set; }
         public string EmployerOrEmployee { get; set; }
-
-
+        [JsonIgnore]
+        public bool SenderDeleted { get; set; }
+        [JsonIgnore]
+        public bool RecipientDeleted { get; set; }
     }
 }

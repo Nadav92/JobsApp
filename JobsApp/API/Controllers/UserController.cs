@@ -34,22 +34,19 @@ namespace API.Controllers
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
 
-            var user = await _unitOfWork.UserRepository.GetUserByUserNameAsync(User.GetUsername());
+            var employerOrEmployee = await _unitOfWork.UserRepository.GetUserEmployerOrEmployee(User.GetUsername());
+            userParams.CurrentUsername = User.GetUsername();
             if (string.IsNullOrEmpty(userParams.EmployerOrEmployee))
             {
-                userParams.EmployerOrEmployee = user.EmployerOrEmployee == "Employee" ? "Employer" : "Employee";
+                userParams.EmployerOrEmployee = employerOrEmployee == "Employee" ? "Employer" : "Employee";
             }
-
-            userParams.CurrentUsername = user.UserName;
-
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
             Response.AddPaginationHeader(
                 users.CurrentPage,
                 users.PageSize,
                 users.TotalCount,
-                users.TotalPages
-                );
+                users.TotalPages);
             return Ok(users);
         }
 
@@ -59,8 +56,6 @@ namespace API.Controllers
         {
             var CurrentUsername = User.GetUsername();
             return await _unitOfWork.UserRepository.GetMemberAsync(username, isCurrentUser: CurrentUsername == username);
-            // var userToReturn = await _unitOfWork.UserRepository.GetMemberAsync(username);
-            // return userToReturn;
         }
 
         [HttpPut]
