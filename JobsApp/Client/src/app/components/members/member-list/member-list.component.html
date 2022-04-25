@@ -1,76 +1,105 @@
-<div class="row col-12" >
+<div class="row col-12">
   <div class="text-center mt-3">
     <h2>Your search found {{pagination?.totalItems}} results </h2>
   </div>
-  
-<div class="container ml-3" >
-  <form #form="ngForm" class="form-inline mb-3" (ngSubmit)="loadMembers()" autocomplete="off">
-    <div class="form-group px-2">
-      <label for="">Age From</label>
-      <input type="number" style="width: 70px;" class="form-control ml-1" name="minAge" [(ngModel)]="userParams.minAge">
-    </div>
-    <div class="form-group px-2">
-      <label for="">Age To</label>
-      <input type="number" style="width: 70px;" class="form-control ml-1" name="maxAge" [(ngModel)]="userParams.maxAge">
-    </div>
-    <div class="form-group px-2">
-      <label for="">Show</label>
-      <label for=""></label>
-      <select style="width: 130px;" class="form-control form-select ml-1" name="employerOrEmployee" [(ngModel)]="userParams.employerOrEmployee">
-        <option *ngFor="let employerOrEmployee of employerOrEmployeeList" [value]="employerOrEmployee.value">{{employerOrEmployee.display}}</option>
-      </select>
-    </div>
-    <div class="form-group px-2">
-      <label for="">Profession</label>
-      <select style="width: 130px;" class="form-control form-select ml-1" name="profession" [(ngModel)]="userParams.profession">
-        <option *ngFor="let profession of professionList" [value]="profession.value">{{profession.display}}</option>
-      </select>
-    </div>
-    <button type="submit" class="btn btn-success ml-1">Apply Filters</button>
-    <button (click)="resetFilters()" type="button" class="btn btn-secondary ml-1">Reset Filters</button>
-    <div class="col">
-      <div class="btn-form flaot-right">
-        <button 
-          type="button" 
-          class="btn btn-primary" 
-          name="orderBy" 
-          btnRadio="lastActive" 
-          (click)="loadMembers()"
-          [(ngModel)]="userParams.orderBy">
-          Last Active
-        </button>
 
-        <button 
-          type="button" 
-          class="btn btn-primary ml-1" 
-          name="orderBy" 
-          btnRadio="created" 
-          (click)="loadMembers()"
-          [(ngModel)]="userParams.orderBy">
-          Newest Member
-        </button>
+  <div class="container ml-3">
+    <form #form="ngForm"
+          class="form-inline mb-3"
+          (ngSubmit)="loadMembers()"
+          autocomplete="off">
+      <div class="form-group px-2">
+        <label for="">Age From:</label>
+        <input type="number"
+               style="width: 70px;"
+               class="form-control ml-1"
+               name="minAge"
+               [(ngModel)]="userParams.minAge">
       </div>
-    </div>
-  </form>
-</div>
+      <div class="form-group px-2">
+        <label for="">Age To:</label>
+        <input type="number"
+               style="width: 70px;"
+               class="form-control ml-1"
+               name="maxAge"
+               [(ngModel)]="userParams.maxAge">
+      </div>
+      <div class="form-group px-2">
+        <label for="">Show:</label>
+        <label for=""></label>
+        <select style="width: 120px;"
+                class="form-control form-select ml-1"
+                name="employerOrEmployee"
+                [(ngModel)]="userParams.employerOrEmployee">
+          <option *ngFor="let employerOrEmployee of employerOrEmployeeList"
+                  [value]="employerOrEmployee.value">{{employerOrEmployee.display}}</option>
+        </select>
+      </div>
+      <div class="form-group px-2">
+        <label for="">Profession:</label>
+        <select style="width: 100px;"
+                class="form-control form-select ml-1"
+                name="profession"
+                [(ngModel)]="userParams.profession">
+          <option *ngFor="let profession of professionList"
+                  [value]="profession.value">{{profession.display}}</option>
+        </select>
+      </div>
+      <div class="form-group px-2">
+        <label for="">knowanAs:</label>
+        <input type="string"
+               style="width: 170px;"
+               class="form-control ml-1"
+               name="knowanAs"
+               [(ngModel)]="userParams.knownAs">
+      </div>
+      <button type="submit"
+              class="btn btn-success ml-1">Apply Filters</button>
 
-    
-  <div class="col-2 mt-2 ml-5" *ngFor="let member of members">
-    <app-member-card [memberCard] = "member"></app-member-card>
+      <button (click)="resetFilters()"
+              type="button"
+              class="btn btn-secondary ml-1">Reset Filters</button>
+      <div class="col">
+        <div class="btn-form flaot-right">
+          <button type="button"
+                  class="btn btn-primary"
+                  name="orderBy"
+                  btnRadio="lastActive"
+                  (click)="loadMembers()"
+                  [(ngModel)]="userParams.orderBy">
+            Last Active
+          </button>
+
+          <button type="button"
+                  class="btn btn-primary ml-1"
+                  name="orderBy"
+                  btnRadio="created"
+                  (click)="loadMembers()"
+                  [(ngModel)]="userParams.orderBy">
+            Newest Member
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
 
-  <div class=" pagination d-flex justify-content-center" *ngIf="pagination">
-    <pagination
-    class="page-item"
-    [boundaryLinks]="true"
-    [totalItems]="pagination.totalItems"
-    [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage"
-    (pageChanged)="pageChanged($event)"
-    previousText="&lsaquo;"
-    nextText="&rsaquo;"
-    firstText="&laquo;"
-    lastText="&raquo;"
-    >
-  </pagination>
-</div>
+
+  <div class="col-2 mt-2 ml-5"
+       *ngFor="let member of members">
+    <app-member-card [memberCard]="member"></app-member-card>
+  </div>
+
+  <div class=" pagination d-flex justify-content-center"
+       *ngIf="pagination">
+    <pagination class="page-item"
+                [boundaryLinks]="true"
+                [totalItems]="pagination.totalItems"
+                [itemsPerPage]="pagination.itemsPerPage"
+                [(ngModel)]="pagination.currentPage"
+                (pageChanged)="pageChanged($event)"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;">
+    </pagination>
+  </div>

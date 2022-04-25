@@ -11,6 +11,8 @@ export class UserParams {
     profession: Profession;
     orderBy = 'lastActive';
 
+    knownAs: string;
+
     constructor ({employerOrEmployee , profession} : User) {
         this.employerOrEmployee = employerOrEmployee === EmployerOrEmployee.Employee ? EmployerOrEmployee.Employer : EmployerOrEmployee.Employee;
         this.profession = profession = Profession.Default;

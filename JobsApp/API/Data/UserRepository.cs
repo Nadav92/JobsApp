@@ -30,14 +30,14 @@ namespace API.Data
         //     .SingleOrDefaultAsync();
         // }
 
-        public async  Task<MemberDto> GetMemberAsync(string username, bool? isCurrentUser)
+        public async Task<MemberDto> GetMemberAsync(string username, bool? isCurrentUser)
         {
-             var query = _context.Users
-            .Where(x => x.UserName == username)
-            .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .AsQueryable();
+            var query = _context.Users
+           .Where(x => x.UserName == username)
+           .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+           .AsQueryable();
 
-            if(isCurrentUser != null) query = query.IgnoreQueryFilters();
+            if (isCurrentUser != null) query = query.IgnoreQueryFilters();
 
             return await query.FirstOrDefaultAsync();
         }
@@ -47,7 +47,7 @@ namespace API.Data
             var query = _context.Users.AsQueryable();
             query = query.Where(x => x.UserName != userParams.CurrentUsername);
             query = query.Where(x => x.EmployerOrEmployee == userParams.EmployerOrEmployee);
-            var minDob = DateTime.Today.AddYears(-userParams.MaxAge -1);
+            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
             var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
             query = query.Where(x => x.DateOfBirth >= minDob && x.DateOfBirth <= maxDob);
 
@@ -57,15 +57,18 @@ namespace API.Data
                 "Catering" => query.Where(x => x.Profession == "Catering"),
                 "Hi-Tec" => query.Where(x => x.Profession == "Hi-Tec"),
                 "Medicine" => query.Where(x => x.Profession == "Medicine"),
-                 _ => query.OrderByDescending(x => x.Profession == userParams.Profession)
+                _ => query.OrderByDescending(x => x.Profession == userParams.Profession)
             };
 
             query = userParams.OrderBy switch
             {
-                 "created" => query.OrderByDescending(x => x.Created),
-                _ => query.OrderByDescending(x => x.LastActive) 
+                "created" => query.OrderByDescending(x => x.Created),
+                _ => query.OrderByDescending(x => x.LastActive)
             };
-            
+
+            if (userParams.KnownAs != "undefined" && userParams.KnownAs != null)
+                query = query.Where(x => x.KnownAs.ToLower() == userParams.KnownAs.ToLower());
+
             return await PagedList<MemberDto>.CreateAsync
             (
                 query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),

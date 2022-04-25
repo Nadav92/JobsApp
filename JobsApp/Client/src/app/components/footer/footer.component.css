@@ -1,0 +1,12 @@
+.tab-panel{
+    max-width: 30%;
+    margin: auto;
+}
+.details{
+    text-align: left;
+    margin-top: 3px;
+}
+
+.inline{
+    display:inline;
+}

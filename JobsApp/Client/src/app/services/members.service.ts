@@ -49,12 +49,28 @@ export class MembersService {
     params = params.append('employerOrEmployee', userParams.employerOrEmployee);
     params = params.append('profession', userParams.profession);
     params = params.append('orderBy', userParams.orderBy);
+    params = params.append('knownAs', userParams.knownAs);
 
     return getPaginatedResult<Member[]>(`${this.baseUrl}users`, params, this.http)
       .pipe(
         tap(res => this.memberCache.set(cacheKey, res))
       );
   }
+
+  // getMembersByUsername(userParams: UserParams): Observable<PaginatedResult<Member[]>>{
+  //   const cacheKey = Object.values(userParams).join('-');
+  //   const response = this.memberCache.get(cacheKey);
+  //   if (response) return of(response);
+  //   let params = getPaginationParams(userParams.pageNumber, userParams.pageSize);
+
+  //   params = params.append('username', userParams.username);
+
+  //   return getPaginatedResult<Member[]>(`${this.baseUrl}users`, params, this.http)
+  //   .pipe(
+  //     tap(res => this.memberCache.set(cacheKey, res))
+  //   );
+
+  // }
 
   getMember(username: string): Observable<Member> {
     const members = [...this.memberCache.values()];

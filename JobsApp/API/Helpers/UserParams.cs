@@ -13,5 +13,9 @@ namespace API.Helpers
          public string Profession { get; set; } = "Default";
 
         public string OrderBy { get; set; } = "lastActive";
+
+        public string KnownAs { get; set; }
+        
+        
     }
 }
