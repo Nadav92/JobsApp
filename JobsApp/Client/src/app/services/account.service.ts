@@ -56,7 +56,6 @@ export class AccountService {
   }
 
   getDecodedToken(token: any) {
-    // return JSON.parse(atob(token.split('.')[1]))
     const tokenParts = token.split('.');
     const payload = tokenParts[1];
     const decodedPayload = atob(payload);

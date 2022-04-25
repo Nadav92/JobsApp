@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { AdminService } from './services/admin.service';
 import { AccountService } from './services/account.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +12,7 @@ import { PresenceService } from './services/presence.service';
 })
 export class AppComponent implements OnInit{
   title = 'The Jobs app';
-  users :any;
+  // users :any;
 
   constructor(private accoountService: AccountService, private presence : PresenceService){
   }

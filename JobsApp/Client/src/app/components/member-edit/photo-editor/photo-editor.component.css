@@ -5,9 +5,15 @@
   .nv-file-over {
     border: dotted 3px green;
   }
-  
-  /* Default class applied to drop zones on over
-  .another-file-over-class {
-    border: dotted 3px green;
-  } */
+
+  .not-approved {
+    opacity: 0.2;
+    }
+    .img-wrapper {
+    position: relative
+    }
+    .img-text {
+    position: absolute;
+    bottom: 30%;
+    }
   

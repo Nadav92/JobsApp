@@ -1,120 +1,186 @@
-<div class="row" *ngIf="member">
+<div class="row"
+     *ngIf="member">
   <div class="col-4">
     <h1>Your Profile</h1>
   </div>
   <div class="col-8">
-    <div class="alert alert-info" *ngIf="editGeneral.dirty || editResume.dirty">
-        <strong>Information</strong>
-        You have made changes, any unsaved changes will be lost!!!
+    <div class="alert alert-info"
+         *ngIf="editGeneral.dirty || editResume.dirty">
+      <strong>Information</strong>
+      You have made changes, any unsaved changes will be lost!!!
     </div>
   </div>
   <div class="col-4">
-      <div class="card">
-          <img class="card-img-top img-thumbnail" src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}">
-          <div class="card-body">
-              <div>
-                  <strong>Gender:</strong>
-                  <p>{{member.gender}}</p>
-              </div>
-              <div>
-                <strong>Type:</strong>
-                <p>{{member.employerOrEmployee}}</p>
-              </div>
-              <div>
-                <strong>profession:</strong>
-                <p>{{member.profession}}</p>
-              </div>
-               <div>
-                  <strong>Location:</strong>
-                  <p>{{member.city}}, {{member.country}}</p>
-              </div>
-              <div>
-                  <strong>Age:</strong>
-                  <p>{{member.age}}</p>
-              </div>
-              <div>
-                  <strong>Last Active:</strong>
-                  <p>{{member.lastActive | timeago}}</p>
-              </div>
-              <div>
-                  <strong>Member Since:</strong>
-                  <p>{{member.created | date: 'dd MMM yyyy'}}</p>
-              </div>
-              <div>
-                  <strong>Phone Number:</strong>
-                  <p>{{member.phoneNumber}}</p>
-              </div>
-              <div>
-                  <strong>Email:</strong>
-                  <p>{{member.email}}</p>
-              </div>
-          </div>
-          <div class="card-footer">
-            <button [disabled]="editGeneral.pristine" [disabled]="editResume.pristine" 
-            form="editGeneral" form="editResume" 
-            type="submit" class="btn btn-success btn-block">Save Changes</button>
-          </div>
+    <div class="card">
+      <img class="card-img-top img-thumbnail"
+           src="{{member.photoUrl || './assets/user.png'}}"
+           alt="{{member.knownAs}}">
+      <div class="card-body">
+        <div>
+          <strong>Gender:</strong>
+          <p>{{member.gender}}</p>
+        </div>
+        <div>
+          <strong>Type:</strong>
+          <p>{{member.employerOrEmployee}}</p>
+        </div>
+        <div>
+          <strong>profession:</strong>
+          <p>{{member.profession}}</p>
+        </div>
+        <div>
+          <strong>Location:</strong>
+          <p>{{member.city}}, {{member.country}}</p>
+        </div>
+        <div>
+          <strong>Age:</strong>
+          <p>{{member.age}}</p>
+        </div>
+        <div>
+          <strong>Last Active:</strong>
+          <p>{{member.lastActive | timeago}}</p>
+        </div>
+        <div>
+          <strong>Member Since:</strong>
+          <p>{{member.created | date: 'dd MMM yyyy'}}</p>
+        </div>
+        <div>
+          <strong>Phone Number:</strong>
+          <p>{{member.phoneNumber}}</p>
+        </div>
+        <div>
+          <strong>Email:</strong>
+          <p>{{member.email}}</p>
+        </div>
       </div>
+      <div class="card-footer">
+        <button [disabled]="editGeneral.pristine "
+                [disabled]="editResume.pristine"
+                form="editGeneral"
+                form="editResume"
+                type="submit"
+                class="btn btn-success btn-block">Save Changes</button>
+      </div>
+    </div>
   </div>
   <div class="col-8 tabs">
-      <tabset class="member-tabset" >
-          <tab heading="General Update">
-            <form #editGeneral="ngForm" (ngSubmit)="updtaeMember()" id="editGeneral">
-              <h4 *ngIf="member.employerOrEmployee == 'Employee'" >About Me</h4>
-              <h4 *ngIf="member.employerOrEmployee == 'Employer'" >About Us</h4>
-              <textarea [(ngModel)]="member.introduction" name="introduction" class="form-control" rows="6"></textarea>
-              <h4 class="mt-2" *ngIf="member.employerOrEmployee == 'Employee'" >Hobbies</h4 >
-              <textarea *ngIf="member.employerOrEmployee == 'Employee'" [(ngModel)]="member.hobbies" name="hobbies" class="form-control mt-2" rows="6"></textarea>
+    <tabset class="member-tabset">
+      <tab heading="General Update">
+        <form #editGeneral="ngForm"
+              (ngSubmit)="updtaeMember()"
+              id="editGeneral">
+          <h4 *ngIf="member.employerOrEmployee == 'Employee'">About Me</h4>
+          <h4 *ngIf="member.employerOrEmployee == 'Employer'">About Us</h4>
+          <textarea [(ngModel)]="member.introduction"
+                    name="introduction"
+                    class="form-control"
+                    rows="6"></textarea>
+          <h4 class="mt-2"
+              *ngIf="member.employerOrEmployee == 'Employee'">Hobbies</h4>
+          <textarea *ngIf="member.employerOrEmployee == 'Employee'"
+                    [(ngModel)]="member.hobbies"
+                    name="hobbies"
+                    class="form-control mt-2"
+                    rows="6"></textarea>
 
-              <h4 class="mt-2">Profession</h4>
-              <div class="form-inline">
-                <select name="profession" class="form-control form-select mx-2" [(ngModel)]="member.profession">
-                  <option  *ngFor="let p of professionArr" [ngValue]="p.name">{{p.name}}</option>
-                </select>
-              </div>
+          <h4 class="mt-2">Profession</h4>
+          <div class="form-inline">
+            <select name="profession"
+                    class="form-control form-select mx-2"
+                    [(ngModel)]="member.profession">
+              <option *ngFor="let p of professionArr"
+                      [ngValue]="p.name">{{p.name}}</option>
+            </select>
+          </div>
 
-              <h4 class="mt-2">Location Details</h4>
-              <div class="form-inline">
-                <label for="city">City:</label>
-                <input type="text" [(ngModel)]="member.city" name="city" class="form-control mx-2">
-                <label for="country">Country:</label>
-                <input type="text" [(ngModel)]="member.country" name="country" class="form-control mx-2">
-              </div>
-              <h4 class="mt-2">Communication Details</h4>
-              <div class="form-inline">
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="text" [(ngModel)]="member.phoneNumber" name="phoneNumber" class="form-control mx-2">
-                <label for="email">Email:</label>
-                <input type="email" [(ngModel)]="member.email" name="email" class="form-control mx-2">
-              </div>
-            </form>
-          </tab>
-          <tab heading="Resume" >
-            <form #editResume="ngForm" (ngSubmit)="updtaeMember()" id="editResume"  >
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="isEmployeeSwitch" (click)="employeeCheckBox()" [(ngModel)]="isEmployeeSwitch">
-                <label class="form-check-label" for="isEmployeeSwitch">do you want to add Resume?</label>
-              </div>
-              <div *ngIf="isEmployeeSwitch == true">
-                <h4 class="mt-2">professional Summary</h4>
-                <textarea [(ngModel)]="member.professionalSummary" name="professionalSummary" class="form-control" rows="6"></textarea>
-                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Education</h4>
-                <textarea [(ngModel)]="member.education" name="education" class="form-control" rows="4" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
-                <h4 class="mt-2">professional History</h4>
-                <textarea [(ngModel)]="member.professionalHistory" name="professionalHistory" class="form-control" rows="6"></textarea>
-                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Skills</h4>
-                <textarea [(ngModel)]="member.skills" name="skills" class="form-control" rows="3" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
-                <h4 class="mt-2"*ngIf="member.employerOrEmployee == 'Employee'">Languages</h4>
-                <textarea [(ngModel)]="member.languages" name="languages" class="form-control" rows="2" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
-                <h4 *ngIf="member.employerOrEmployee == 'Employee'" class="mt-2">Military Service</h4>
-                <textarea [(ngModel)]="member.militaryService" name="militaryService" class="form-control" rows="2" *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
-              </div>
-            </form>
-          </tab>
-          <tab heading="Edit Photo">
-            <app-photo-editor [member]="member"></app-photo-editor>
-          </tab>
+          <h4 class="mt-2">Location Details</h4>
+          <div class="form-inline">
+            <label for="city">City:</label>
+            <input type="text"
+                   [(ngModel)]="member.city"
+                   name="city"
+                   class="form-control mx-2">
+            <label for="country">Country:</label>
+            <input type="text"
+                   [(ngModel)]="member.country"
+                   name="country"
+                   class="form-control mx-2">
+          </div>
+          <h4 class="mt-2">Communication Details</h4>
+          <div class="form-inline">
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text"
+                   [(ngModel)]="member.phoneNumber"
+                   name="phoneNumber"
+                   class="form-control mx-2">
+            <label for="email">Email:</label>
+            <input type="email"
+                   [(ngModel)]="member.email"
+                   name="email"
+                   class="form-control mx-2">
+          </div>
+        </form>
+      </tab>
+      <tab heading="Resume">
+        <form #editResume="ngForm"
+              (ngSubmit)="updtaeMember()"
+              id="editResume">
+          <div class="form-check form-switch">
+            <input class="form-check-input"
+                   type="checkbox"
+                   id="isEmployeeSwitch"
+                   (click)="employeeCheckBox()"
+                   name="isEmployeeSwitch"
+                   [(ngModel)]="isEmployeeSwitch">
+            <label class="form-check-label"
+                   for="isEmployeeSwitch">do you want to add Resume?</label>
+          </div>
+          <div *ngIf="isEmployeeSwitch == true">
+            <h4 class="mt-2">professional Summary</h4>
+            <textarea [(ngModel)]="member.professionalSummary"
+                      name="professionalSummary"
+                      class="form-control"
+                      rows="6"></textarea>
+            <h4 *ngIf="member.employerOrEmployee == 'Employee'"
+                class="mt-2">Education</h4>
+            <textarea [(ngModel)]="member.education"
+                      name="education"
+                      class="form-control"
+                      rows="4"
+                      *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+            <h4 class="mt-2">professional History</h4>
+            <textarea [(ngModel)]="member.professionalHistory"
+                      name="professionalHistory"
+                      class="form-control"
+                      rows="6"></textarea>
+            <h4 *ngIf="member.employerOrEmployee == 'Employee'"
+                class="mt-2">Skills</h4>
+            <textarea [(ngModel)]="member.skills"
+                      name="skills"
+                      class="form-control"
+                      rows="3"
+                      *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+            <h4 class="mt-2"
+                *ngIf="member.employerOrEmployee == 'Employee'">Languages</h4>
+            <textarea [(ngModel)]="member.languages"
+                      name="languages"
+                      class="form-control"
+                      rows="2"
+                      *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+            <h4 *ngIf="member.employerOrEmployee == 'Employee'"
+                class="mt-2">Military Service</h4>
+            <textarea [(ngModel)]="member.militaryService"
+                      name="militaryService"
+                      class="form-control"
+                      rows="2"
+                      *ngIf="member.employerOrEmployee == 'Employee'"></textarea>
+          </div>
+        </form>
+      </tab>
+      <tab heading="Edit Photo">
+        <app-photo-editor [member]="member"></app-photo-editor>
+      </tab>
 
-      </tabset>
+    </tabset>
   </div>
 </div>

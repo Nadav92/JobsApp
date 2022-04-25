@@ -15,20 +15,6 @@ namespace API.Controllers
     [Authorize]
     public class MessagesController : BaseApiController
     {
-        // private readonly IUserRepository _unitOfWork.UserRepository;
-        // private readonly IMessagesRepository _unitOfWork.MessagesRepository;
-
-        // public MessagesController(
-        //     IUserRepository userRepository,
-        //     IMessagesRepository messagesRepository,
-        //     IMapper mapper
-
-        // )
-        // {
-        //     this._unitOfWork.UserRepository = userRepository;
-        //     this._unitOfWork.MessagesRepository = messagesRepository;
-        //     this._mapper = mapper;
-        // }
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -79,14 +65,6 @@ namespace API.Controllers
             Response.AddPaginationHeader(messages.CurrentPage, messages.PageSize, messages.TotalCount, messages.TotalPages);
             return Ok(messages);
         }
-
-        // [HttpGet("thread/{username}")]
-        // public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
-        // {
-        //     var currentUsername = User.GetUsername();
-        //     var messgaeThread = await _unitOfWork.MessagesRepository.GetMessageThread(currentUsername, username);
-        //     return Ok(messgaeThread);
-        // }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteMessage(int id)

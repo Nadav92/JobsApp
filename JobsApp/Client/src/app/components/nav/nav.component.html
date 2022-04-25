@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-dark sticky-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">Jobs App</a>
+    
+    <a class="navbar-brand" style="color: white;">Jobs App</a>
  
       <ul  class="navbar-nav mr-auto">
         <ng-container *ngIf="currentUser$ | async as user" >
@@ -18,10 +19,10 @@
           <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
             <a class="nav-link" routerLinkActive="active" routerLink="/admin">Admin</a>
           </li>
+          <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/errors">Errors</a>
+          </li>
         </ng-container>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/errors">Errors</a>
-        </li>
       </ul>
 
       <div class="dropdown" *ngIf="currentUser$ | async as user" dropdown>

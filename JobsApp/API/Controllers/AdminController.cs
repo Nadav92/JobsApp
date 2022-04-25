@@ -77,7 +77,10 @@ namespace API.Controllers
         public async Task<ActionResult> ApprovePhoto(int photoId)
         {
             var photo = await _unitOfWork.PhotoRepository.GetPhotoById(photoId);
+            if(photo == null) return NotFound("Colud not find photo");
             photo.IsApproved = true;
+            var user = await _unitOfWork.UserRepository.GetUserByPhotoId(photoId);
+            if(!user.Photos.Any(x => x.IsMain)) photo.IsMain = true;
             await _unitOfWork.Complete();
             return Ok();
         }
