@@ -63,11 +63,6 @@
                 <p *ngIf="member.hobbies">{{member.hobbies}}</p>
                 <p *ngIf="!member.hobbies">No content</p>
             </tab>
-            <!-- <tab (selectTab)="onTabActivated($event)" heading="About {{member.knownAs}}" *ngIf="member.employerOrEmployee == 'Employer'">
-                <h4> About Us</h4>
-                <p *ngIf="member.introduction" >{{member.introduction}}</p>
-                <p *ngIf="!member.introduction">No content</p>
-            </tab> -->
             <tab (selectTab)="onTabActivated($event)"  heading="Resume" >
                 <h4 *ngIf="member.professionalSummary">professional Summary</h4>
                 <p>{{member.professionalSummary}}</p>

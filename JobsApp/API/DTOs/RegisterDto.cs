@@ -15,7 +15,7 @@ namespace API.DTOs
         [Required] public string Country { get; set; }
         
         [Required]
-        [StringLength(8, MinimumLength =4, ErrorMessage ="You must specify password between 4 and 8 chars")]
+        [StringLength(8, MinimumLength = 6, ErrorMessage ="You must specify password between 6 and 8 chars")]
         public string Password { get; set; }
     }
 }
