@@ -1,3 +1,4 @@
-# Jobs
-.net core + angular jobs app
-fsdfdfd
+# Jobs app
+This `project` write with .net core + angular.
+
+##
