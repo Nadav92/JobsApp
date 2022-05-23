@@ -99,7 +99,6 @@ namespace API.Controllers
                 {
                     _unitOfWork.PhotoRepository.RemovePhoto(photo);
                 }
-
             }
             else
             {

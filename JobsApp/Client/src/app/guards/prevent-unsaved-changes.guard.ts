@@ -1,6 +1,6 @@
 import { MemberEditComponent } from './../components/member-edit/member-edit.component';
 import { Injectable } from "@angular/core";
-import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ConfirmService } from '../services/confirm.service';
 

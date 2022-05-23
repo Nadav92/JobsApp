@@ -1,9 +1,8 @@
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AdminService } from './../../../services/admin.service';
 import { Component, OnInit } from '@angular/core';
 import { Photo } from 'src/app/models/photo';
-import { take } from 'rxjs';
+
 
 @Component({
   selector: 'app-photo-managment',

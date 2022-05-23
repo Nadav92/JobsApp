@@ -36,9 +36,6 @@ namespace API.SignalR
             }
 
             await base.OnDisconnectedAsync(exception);
-            // var currentUsers = await _tracker.GetOnlineUsers();
-            // await Clients.All.SendAsync("GetOnlineUsers", currentUsers);
-
         }
     }
 }

@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
   ValidationErrors: string[] = [];
   
   constructor(private accountService: AccountService,
-    private toastr: ToastrService,
     private fb:FormBuilder,
     private router:Router) { }
   ngOnInit(): void {
@@ -33,16 +32,13 @@ export class RegisterComponent implements OnInit {
         this.cancel();
       },
       error => {
-        // this.toastr.error(error.error);
-        // console.log(error);
         if(Array.isArray(error)){
           this.ValidationErrors = error;
         }
      
       }
     )
-    console.log(this.registerForm.value);
-    
+    console.log(this.registerForm.value);  
   }
 
   cancel() {
@@ -62,11 +58,6 @@ export class RegisterComponent implements OnInit {
       employerOrEmployee: ['Employer'],
       profession: ['', Validators.required]
     });
-    // this.registerForm = new FormGroup({
-    //   username: new FormControl('Username', Validators.required),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(4) ,Validators.maxLength(8)]),
-    //   confirmPassword: new FormControl('', [Validators.required, this.matchValues('password')] ),
-    // });
     this.registerForm.get('password')?.valueChanges.subscribe(() => {
       this.registerForm.get('confirmPassword')?.updateValueAndValidity();
     })

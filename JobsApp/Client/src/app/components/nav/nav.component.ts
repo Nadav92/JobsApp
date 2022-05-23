@@ -1,9 +1,8 @@
 import { Member } from 'src/app/models/member';
-import { MembersService } from 'src/app/services/members.service';
 import { User } from 'src/app/models/User';
 import { AccountService } from '../../services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, take, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,11 +13,8 @@ import { Router } from '@angular/router';
 
 
 export class NavComponent implements OnInit {
-  // username = "";
-  // showEmploeeOrEmployer = false;
    member: Member;
    
-
   model: any = {};
   currentUser$: Observable<User | null>;
   constructor(
@@ -26,7 +22,6 @@ export class NavComponent implements OnInit {
     private router: Router
   ) {
     this.currentUser$ = this.accountService.currentUser$;
-    
   }
 
   ngOnInit() {
@@ -38,8 +33,6 @@ export class NavComponent implements OnInit {
         this.router.navigateByUrl('/members');
         console.log(response);
       });
-
-      
   }
 
   logout() {

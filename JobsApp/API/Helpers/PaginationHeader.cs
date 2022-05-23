@@ -1,4 +1,3 @@
-using System.Data.Common;
 namespace API.Helpers
 {
     public class PaginationHeader
@@ -18,7 +17,6 @@ namespace API.Helpers
         public int TotalItems { get; set; }
 
         public int TotalPages { get; set; }
-
 
     }
 }

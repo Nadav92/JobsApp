@@ -1,4 +1,3 @@
-using System.Net;
 using API.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +47,5 @@ namespace API.Controllers
         {
             return BadRequest("this was not a good request");
         }
-
     }
 }

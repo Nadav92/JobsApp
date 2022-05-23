@@ -13,13 +13,6 @@ namespace API.Controllers
     [Authorize]
     public class LikesController : BaseApiController
     {
-        // private readonly ILikesRepository _unitOfWork.LikesRepository;
-        // private readonly IUserRepository _unitOfWork.UserRepository;
-        // public LikesController(IUserRepository usersRepository, ILikesRepository likesRepository)
-        // {
-        //     // _unitOfWork.UserRepository = usersRepository;
-        //     // _unitOfWork.LikesRepository = likesRepository;
-        // }
         private readonly IUnitOfWork _unitOfWork;
 
         public LikesController(IUnitOfWork unitOfWork)
@@ -40,8 +33,7 @@ namespace API.Controllers
             if (sourceUser.UserName == username) return BadRequest("You can't like yourself");
             
             var userLike = await _unitOfWork.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
-            // if (userLike != null) return BadRequest("You alradey like this user");
-
+            
             var like = userLike == null;
             if (like)
             {

@@ -57,21 +57,6 @@ export class MembersService {
       );
   }
 
-  // getMembersByUsername(userParams: UserParams): Observable<PaginatedResult<Member[]>>{
-  //   const cacheKey = Object.values(userParams).join('-');
-  //   const response = this.memberCache.get(cacheKey);
-  //   if (response) return of(response);
-  //   let params = getPaginationParams(userParams.pageNumber, userParams.pageSize);
-
-  //   params = params.append('username', userParams.username);
-
-  //   return getPaginatedResult<Member[]>(`${this.baseUrl}users`, params, this.http)
-  //   .pipe(
-  //     tap(res => this.memberCache.set(cacheKey, res))
-  //   );
-
-  // }
-
   getMember(username: string): Observable<Member> {
     const members = [...this.memberCache.values()];
     const allMembers = members.reduce((arr: Member[], elem: PaginatedResult<Member[]>) => arr.concat(elem.result), []);

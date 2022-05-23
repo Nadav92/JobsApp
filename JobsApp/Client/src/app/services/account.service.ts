@@ -62,5 +62,4 @@ export class AccountService {
     return JSON.parse(decodedPayload);
   }
 
-
 }

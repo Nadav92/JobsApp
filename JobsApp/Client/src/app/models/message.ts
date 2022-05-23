@@ -11,7 +11,5 @@ export class Message{
     messageSent: Date;
     senderKnownAs: string;
     recipientKnownAs: string;
-
-    ///recipient
     employerOrEmployee : string;
 }

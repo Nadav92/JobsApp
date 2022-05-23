@@ -5,8 +5,6 @@ namespace API.DTOs
         public int Id { get; set; }
         
         public string Username { get; set; }
-        
-        // public int Age { get; set; }
 
         public string KnownAs { get; set; }
         
@@ -19,9 +17,5 @@ namespace API.DTOs
         public string EmployerOrEmployee { get; set; }
 
         public string Profession { get; set; }
-        
-        
-        
-        
     }
 }

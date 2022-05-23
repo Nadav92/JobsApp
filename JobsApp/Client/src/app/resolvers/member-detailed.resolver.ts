@@ -1,8 +1,7 @@
 import { MembersService } from './../services/members.service';
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
-  RouterStateSnapshot,
+  Resolve,
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -12,11 +11,11 @@ import { Member } from '../models/member';
   providedIn: 'root'
 })
 export class MemberDetailedResolver implements Resolve<Member> {
-  constructor(private membersService: MembersService){
+  constructor(private membersService: MembersService) {
 
   }
 
   resolve(route: ActivatedRouteSnapshot,): Observable<Member> {
-    return this.membersService.getMember(route.paramMap.get('username')as string);
+    return this.membersService.getMember(route.paramMap.get('username') as string);
   }
 }

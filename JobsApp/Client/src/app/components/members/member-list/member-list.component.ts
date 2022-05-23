@@ -1,9 +1,6 @@
 import { User } from 'src/app/models/User';
-import { AccountService } from './../../../services/account.service';
-import { ToastrService } from 'ngx-toastr';
 import { Pagination } from './../../../models/pagination';
 import { Member } from './../../../models/member';
-import { take } from 'rxjs';
 import { MembersService } from './../../../services/members.service';
 import { Component, OnInit } from '@angular/core';
 import { UserParams } from 'src/app/models/userParams';
@@ -87,5 +84,3 @@ export class MemberListComponent implements OnInit {
   }
 
 }
-
-

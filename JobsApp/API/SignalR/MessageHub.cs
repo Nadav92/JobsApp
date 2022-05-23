@@ -1,4 +1,3 @@
-using System.Security.AccessControl;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ namespace API.SignalR
 {
     public class MessageHub : Hub
     {
-        // private readonly IMessagesRepository _unitOfWork.MessagesRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHubContext<PresenceHub> _presenceHub;
@@ -25,7 +23,6 @@ namespace API.SignalR
             _presenceHub = presenceHub;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            // _unitOfWork.MessagesRepository = messageReopsitory;
         }
 
         public override async Task OnConnectedAsync()
@@ -138,6 +135,5 @@ namespace API.SignalR
             var stringCompare = string.CompareOrdinal(caller, other) < 0;
             return stringCompare ? $"{caller}-{other}" : $"{other}-{caller}";
         }
-
     }
 }

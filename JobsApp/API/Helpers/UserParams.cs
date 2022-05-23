@@ -1,4 +1,3 @@
-using System;
 namespace API.Helpers
 {
     public class UserParams : PaginationParams
@@ -15,7 +14,5 @@ namespace API.Helpers
         public string OrderBy { get; set; } = "lastActive";
 
         public string KnownAs { get; set; }
-        
-        
     }
 }

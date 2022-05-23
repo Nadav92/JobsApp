@@ -1,88 +1,96 @@
 <div class="row col-12">
-    <div class="col-4">
-        <div class="card">
-            <img class="card-img-top img-thumbnail" src="{{member.photoUrl || '/assets/user.png'}}" alt="{{member.knownAs}}">
-            <div class="card-body">
-                <div class="mb-2" *ngIf="(presence.onlineUsers$ | async)?.includes(member.username)">
-                    <i class="fa fa-user-circle text-success"></i> Online now
-                </div>
-                <div *ngIf="member.gender">
-                    <strong >Gender:</strong>
-                    <p>{{member.gender}}</p>
-                </div>
-                <div>
-                    <strong>I am:</strong>
-                    <p>{{member.employerOrEmployee}}</p>  
-                </div>
-                <div>
-                    <strong>Profession:</strong>
-                    <p>{{member.profession}}</p>
-                </div>
-                 <div>
-                    <strong>Location:</strong>
-                    <p>{{member.city}}, {{member.country}}</p>
-                </div>
-                <div>
-                    <strong>Age:</strong>
-                    <p>{{member.age}}</p>
-                </div>
-                <div>
-                    <strong>Last Active:</strong>
-                    <p>{{member.lastActive |timeago}}</p>
-                </div>
-                <div>
-                    <strong>Member Since:</strong>
-                    <p>{{member.created | date : 'longDate'}}</p>
-                </div>
-                <div *ngIf="member.phoneNumber">
-                    <strong>Phone Number:</strong>
-                    <p>{{member.phoneNumber}}</p>
-                </div>
-                <div *ngIf="member.email">
-                    <strong>Email:</strong>
-                    <p>{{member.email}}</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="btn-group d-flex">
-                    <button class="btn btn-primary">Like</button>
-                    <button class="btn btn-success" (click)="selectTab(3)">Message</button>
-                    <!-- <button class="btn btn-success" *ngIf="member.employerOrEmployee == 'Employee'" (click)="selectTab(3)">Message</button> -->
-                    <!-- <button class="btn btn-success" *ngIf="member.employerOrEmployee == 'Employer'" (click)="selectTab(2)">Message</button> -->
-                </div>
-            </div>
+  <div class="col-4">
+    <div class="card">
+      <img class="card-img-top img-thumbnail"
+           src="{{member.photoUrl || '/assets/user.png'}}"
+           alt="{{member.knownAs}}">
+      <div class="card-body">
+        <div class="mb-2"
+             *ngIf="(presence.onlineUsers$ | async)?.includes(member.username)">
+          <i class="fa fa-user-circle text-success"></i> Online now
         </div>
+        <div *ngIf="member.gender">
+          <strong>Gender:</strong>
+          <p>{{member.gender}}</p>
+        </div>
+        <div>
+          <strong>I am:</strong>
+          <p>{{member.employerOrEmployee}}</p>
+        </div>
+        <div>
+          <strong>Profession:</strong>
+          <p>{{member.profession}}</p>
+        </div>
+        <div>
+          <strong>Location:</strong>
+          <p>{{member.city}}, {{member.country}}</p>
+        </div>
+        <div>
+          <strong>Age:</strong>
+          <p>{{member.age}}</p>
+        </div>
+        <div>
+          <strong>Last Active:</strong>
+          <p>{{member.lastActive |timeago}}</p>
+        </div>
+        <div>
+          <strong>Member Since:</strong>
+          <p>{{member.created | date : 'longDate'}}</p>
+        </div>
+        <div *ngIf="member.phoneNumber">
+          <strong>Phone Number:</strong>
+          <p>{{member.phoneNumber}}</p>
+        </div>
+        <div *ngIf="member.email">
+          <strong>Email:</strong>
+          <p>{{member.email}}</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="btn-group d-flex">
+          <button class="btn btn-success"
+                  (click)="selectTab(3)">Message</button>
+        </div>
+      </div>
     </div>
-    <div class="col-8 tabs">
-        <tabset  #memberTabs class="member-tabset">
-            <tab (selectTab)="onTabActivated($event)" heading="About {{member.knownAs}}">
-                <h4> About Me</h4>
-                <p *ngIf="member.introduction" >{{member.introduction}}</p>
-                <p *ngIf="!member.introduction">No content</p>
-                <h4>Hobbies</h4>
-                <p *ngIf="member.hobbies">{{member.hobbies}}</p>
-                <p *ngIf="!member.hobbies">No content</p>
-            </tab>
-            <tab (selectTab)="onTabActivated($event)"  heading="Resume" >
-                <h4 *ngIf="member.professionalSummary">professional Summary</h4>
-                <p>{{member.professionalSummary}}</p>
-                <h4 *ngIf="member.education && member.employerOrEmployee == 'Employee'">Education</h4>
-                <p>{{member.education}}</p>
-                <h4 *ngIf="member.professionalHistory">professional History</h4>
-                <p>{{member.professionalHistory}}</p>
-                <h4 *ngIf="member.skills && member.employerOrEmployee == 'Employee'">Skills</h4>
-                <p>{{member.skills}}</p>
-                <h4 *ngIf="member.languages && member.employerOrEmployee == 'Employee'">Languages</h4>
-                <p>{{member.languages}}</p>
-                <h4 *ngIf="member.militaryService && member.employerOrEmployee == 'Employee'">Military Service</h4>
-                <p>{{member.militaryService}}</p>
-            </tab>
-            <tab (selectTab)="onTabActivated($event)" heading="Photo" >
-                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
-            </tab>
-            <tab (selectTab)="onTabActivated($event)" heading="Messages" >
-                <app-member-messages [username]="member.username"> </app-member-messages>
-            </tab>
-        </tabset>
-    </div>
+  </div>
+  <div class="col-8 tabs">
+    <tabset #memberTabs
+            class="member-tabset">
+      <tab (selectTab)="onTabActivated($event)"
+           heading="About {{member.knownAs}}">
+        <h4> About Me</h4>
+        <p *ngIf="member.introduction">{{member.introduction}}</p>
+        <p *ngIf="!member.introduction">No content</p>
+        <h4>Hobbies</h4>
+        <p *ngIf="member.hobbies">{{member.hobbies}}</p>
+        <p *ngIf="!member.hobbies">No content</p>
+      </tab>
+      <tab (selectTab)="onTabActivated($event)"
+           heading="Resume">
+        <h4 *ngIf="member.professionalSummary">professional Summary</h4>
+        <p>{{member.professionalSummary}}</p>
+        <h4 *ngIf="member.education && member.employerOrEmployee == 'Employee'">Education</h4>
+        <p>{{member.education}}</p>
+        <h4 *ngIf="member.professionalHistory">professional History</h4>
+        <p>{{member.professionalHistory}}</p>
+        <h4 *ngIf="member.skills && member.employerOrEmployee == 'Employee'">Skills</h4>
+        <p>{{member.skills}}</p>
+        <h4 *ngIf="member.languages && member.employerOrEmployee == 'Employee'">Languages</h4>
+        <p>{{member.languages}}</p>
+        <h4 *ngIf="member.militaryService && member.employerOrEmployee == 'Employee'">Military Service</h4>
+        <p>{{member.militaryService}}</p>
+      </tab>
+      <tab (selectTab)="onTabActivated($event)"
+           heading="Photo">
+        <ngx-gallery [options]="galleryOptions"
+                     [images]="galleryImages"
+                     class="ngx-gallery"></ngx-gallery>
+      </tab>
+      <tab (selectTab)="onTabActivated($event)"
+           heading="Messages">
+        <app-member-messages [username]="member.username"> </app-member-messages>
+      </tab>
+    </tabset>
+  </div>
 </div>

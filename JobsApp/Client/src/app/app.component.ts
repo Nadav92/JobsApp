@@ -12,7 +12,6 @@ import { PresenceService } from './services/presence.service';
 })
 export class AppComponent implements OnInit{
   title = 'The Jobs app';
-  // users :any;
 
   constructor(private accoountService: AccountService, private presence : PresenceService){
   }

@@ -1,6 +1,5 @@
 import { NgForm } from '@angular/forms';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Message } from 'src/app/models/message';
 import { MessageService } from 'src/app/services/Message.service';
 
 @Component({

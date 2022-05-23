@@ -1,4 +1,3 @@
-using System;
 using API.Data;
 using API.Helpers;
 using API.Interfaces;
@@ -14,9 +13,6 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
-            // services.AddScoped<IMessagesRepository, MessagesRepository>();
-            // services.AddScoped<ILikesRepository, LikesRepository>();
-            // services.AddScoped<IUserRepository , UserRepository>();
             services.AddSingleton<PresenceTracker>();
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<ITokenService, TokenService>();
@@ -27,10 +23,6 @@ namespace API.Extensions
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlite(config.GetConnectionString("DefaultConnection"))
             );
-
-  
-
-
             return services;
         }
     }

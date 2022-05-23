@@ -112,24 +112,5 @@ namespace API.Data
         {
             _context.Connections.Remove(connection);
         }
-
-        // public async Task<bool> SaveAllAsync()
-        // {
-        //     return await _context.SaveChangesAsync() > 0;
-        // }
-
-        // private async Task<int> updateUnread(List<Message> messages, string currentUsername)
-        // {
-        //     var unreadMessages = messages.Where(m => m.DateRead == null &&
-        //                m.Recipient.UserName == currentUsername).ToList();
-
-        //     if (unreadMessages.Any())
-        //     {
-        //         foreach (var um in unreadMessages) um.DateRead = DateTime.UtcNow;
-        //         var rtn = await _context.SaveChangesAsync();
-        //         if (rtn < unreadMessages.Count) return -1;
-        //     }
-        //     return 1;
-        // }
     }
 }

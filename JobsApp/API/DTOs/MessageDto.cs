@@ -15,8 +15,6 @@ namespace API.DTOs
         public string Content { get; set; }
         public DateTime? DateRead { get; set; }
         public DateTime MessageSent { get; set; }
-
-
         public string SenderKnownAs { get; set; }
         public string RecipientKnownAs { get; set; }
         public string EmployerOrEmployee { get; set; }

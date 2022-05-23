@@ -18,4 +18,3 @@ export class UserParams {
         this.profession = profession = Profession.Default;
     }
 }
-

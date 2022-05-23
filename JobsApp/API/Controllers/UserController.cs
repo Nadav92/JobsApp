@@ -16,7 +16,6 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        // private readonly IUserRepository _unitOfWork.UserRepository;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
         private readonly IUnitOfWork _unitOfWork;
@@ -26,7 +25,6 @@ namespace API.Controllers
             _unitOfWork = unitOfWork;
             _photoService = photoService;
             _mapper = mapper;
-            // _unitOfWork.UserRepository = userRepository;
         }
 
 
@@ -92,8 +90,6 @@ namespace API.Controllers
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
-            // photo.IsMain = user.Photos.Count == 0;
 
             user.Photos.Add(photo);
 

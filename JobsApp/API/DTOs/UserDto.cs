@@ -12,8 +12,5 @@ namespace API.DTOs
 
         public string EmployerOrEmployee { get; set; }
         public string Profession { get; set; }
-        
-        
-
     }
 }
