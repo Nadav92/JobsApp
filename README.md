@@ -15,11 +15,12 @@ Username - Admin. <br>
 Password - Pa$$w0rd. <br>
 
 User can login as Member with <br>
-Usernames  - moti ,nadavBaker ,nadav ,team3 ,dor ,soroka , <br>
-matan ,ofir ,lcontrol ,shaul.
+Usernames  - moti ,nadavBaker ,nadav ,team3 ,dor ,soroka ,matan ,ofir ,lcontrol ,shaul. <br>
 Password - Pa$$w0rd.
 
 ## Functionality
-
+#### Admin user
+This type of user can managment other users, if they can be admin / moderator / member. <br>
+Also need to improve photos when member upload photo at `Admin` tab.
 ## Content
 
