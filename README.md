@@ -21,7 +21,8 @@ User can register to application, view users and thier details, message to other
 like / unlike user and  edit his own details. <br>
 To run the project please open in integrated terminal of:
 1. Backend - right click on API folder, open terminal and write `dotnet run`.
-2. Front - right click on Client folder, open terminal and write `ng serve`.
+2. Front - right click on Client folder, open terminal and write `npm i`. When its finish write `ng serve`.
+Click on the url with Ctrl and left click, The application will open.
 ## Login
 User can login as Admin with <br>
 Username - Admin. <br>
