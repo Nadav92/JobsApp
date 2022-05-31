@@ -1,6 +1,6 @@
 # Jobs app
 The project write with .net core + angular. <br>
-Database - the project used SQLite. <br>
+Database - used SQLite. <br>
 The project use Cludinary (external API) for photo service to save and managment the photos of users.
 ### Database
 Open the database by `Ctrl + Shift + P` and choose `SqLite: open database`.<br> 
@@ -29,7 +29,7 @@ Password - Pa$$w0rd. <br>
 User can login as Member with <br>
 Usernames  - moti ,nadavBaker ,nadav ,team3 ,dor ,soroka ,matan ,ofir ,lcontrol ,shaul. <br>
 Password - Pa$$w0rd.<br>
-Between users please refresh the page.
+Between switch users please refresh the page.
 ## Functionality and Content
 #### Register
 Form for register new user to the application.<br>
@@ -37,17 +37,18 @@ Validation - every field with validation by the type of the field.
 #### Login
 User can login by username and password.
 ### Find Employee / Job page
-In the project I have two diffrente types of users - Employee / Employer. <br>
-Employee - write find job, and Employer = write find employee. <br>
-At this page user can filter by age , employee / employer , knowan as, last active and newest member. <br>
+The project have two diffrente types of users - Employee / Employer. <br>
+Employee - write find job, and Employer - write find employee. <br>
+At this page user can filter by age , employee / employer , knowan as (search input), last active and newest member. <br>
 Also user can reset the filter.<br>
 View to user the opposite of his type of user, the user can view user details, navigate to <br>
-message page and like / unlike the user. 
+message page and like / unlike the user by the icons on the user card.
 ### Lists page
-At this page user can see the user hwo like him or users that he like. <br>
-Also he can unlike user and the user will remove from the list.
+At this page user can see the user who like him or users that he like. <br>
+Also  can unlike user and the user will remove from the list.
 ### Messages page
 At this page user can view all the messages and delete from his UI, the message doesnt deleted to other user. <br>
+If the other user delete the messgae also, than this messgae delete from database.<br>
 By default the user navigate to unread messages, user can navigate to inbox or outbix as well.<br>
 ### Footer page
 Contact with the author.
@@ -80,7 +81,7 @@ This page is to check all the common types of errors at the application.
 Messages tab at the user details. can navigate directly by click message icon at find employee page.<br>
 Used at SignalR technology to view live messages.<br>
 Can check it by open the application in other type of explorer like edge.<br>
-When user send message the reciver get toastr (note) that he have message.<br>
+When user send message the receiver get toastr (note) that he have message.<br>
  By click on the note the user navigate directly to message tab and the chat will be live.<br>
  ### Photo tab - edit profile
 User can add photo/s and wait untill the admin will improve the photos.<br>
